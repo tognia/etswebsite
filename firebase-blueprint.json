@@ -1,0 +1,25 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "A construction project lead/quote request",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name of the client" },
+        "email": { "type": "string", "format": "email", "description": "Email address" },
+        "workType": { "type": "string", "enum": ["Génie Civil", "Bâtiment", "Travaux Routiers", "Autre"] },
+        "budget": { "type": "string", "description": "Estimated budget in FCFA" },
+        "message": { "type": "string", "description": "Project details" },
+        "planUrl": { "type": "string", "format": "uri", "description": "URL to the uploaded plan in storage" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "workType", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Collection of project leads"
+    }
+  }
+}
