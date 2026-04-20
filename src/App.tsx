@@ -3,13 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Expertise from './components/Expertise';
-import Portfolio from './components/Portfolio';
-import DevisForm from './components/DevisForm';
-import Footer from './components/Footer';
-import ErrorBoundary from './components/ErrorBoundary';
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Expertise from "./components/Expertise";
+import Portfolio from "./components/Portfolio";
+import DevisForm from "./components/DevisForm";
+import ContactForm from "./components/ContactForm";
+import Footer from "./components/Footer";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Expertise />
           <Portfolio />
           <DevisForm />
+          <ContactForm />
         </main>
         <Footer />
       </div>

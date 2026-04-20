@@ -1,5 +1,13 @@
-import { motion } from 'motion/react';
-import { HardHat, Mail, Phone, MapPin, Facebook, Linkedin, Instagram } from 'lucide-react';
+import { motion } from "motion/react";
+import {
+  HardHat,
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 
 export default function Footer() {
   return (
@@ -14,33 +22,83 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-gray-400 leading-relaxed">
-              Leader du BTP au Cameroun, nous construisons les infrastructures de demain avec rigueur et innovation.
+              Leader du BTP au Cameroun, nous construisons les infrastructures
+              de demain avec rigueur et innovation.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all">
+              <a
+                href="#"
+                className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all"
+              >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all">
+              <a
+                href="#"
+                className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all"
+              >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all">
+              <a
+                href="#"
+                className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">Navigation</h4>
+            <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">
+              Navigation
+            </h4>
             <ul className="space-y-4 text-gray-400">
-              <li><a href="#" className="hover:text-brand-orange transition-colors">Accueil</a></li>
-              <li><a href="#expertise" className="hover:text-brand-orange transition-colors">Expertise</a></li>
-              <li><a href="#portfolio" className="hover:text-brand-orange transition-colors">Nos Projets</a></li>
-              <li><a href="#devis" className="hover:text-brand-orange transition-colors">Demander un Devis</a></li>
+              <li>
+                <a
+                  href="#"
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  Accueil
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#expertise"
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  Expertise
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#portfolio"
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  Nos Projets
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#devis"
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  Demander un Devis
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  Contactez-nous
+                </a>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">Contact</h4>
+            <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">
+              Contact
+            </h4>
             <ul className="space-y-4 text-gray-400">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-brand-orange shrink-0" />
@@ -58,8 +116,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">Newsletter</h4>
-            <p className="text-gray-400 mb-6">Restez informé de nos derniers projets et innovations.</p>
+            <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">
+              Newsletter
+            </h4>
+            <p className="text-gray-400 mb-6">
+              Restez informé de nos derniers projets et innovations.
+            </p>
             <form className="flex">
               <input
                 type="email"
@@ -76,8 +138,12 @@ export default function Footer() {
         <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500">
           <p>© {new Date().getFullYear()} ETS N MOISE. Tous droits réservés.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">Mentions Légales</a>
-            <a href="#" className="hover:text-white transition-colors">Politique de Confidentialité</a>
+            <a href="#" className="hover:text-white transition-colors">
+              Mentions Légales
+            </a>
+            <a href="#" className="hover:text-white transition-colors">
+              Politique de Confidentialité
+            </a>
           </div>
         </div>
       </div>

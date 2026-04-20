@@ -1,5 +1,5 @@
-import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -28,17 +28,18 @@ export default function Hero() {
               Génie Civil & BTP au Cameroun
             </span>
           </div>
-          
+
           <h1 className="text-6xl md:text-8xl font-display font-black text-white leading-[0.9] mb-8 uppercase italic">
             Bâtir l'avenir <br />
             <span className="text-brand-orange">avec précision</span>
           </h1>
-          
+
           <p className="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed">
-            ETS N MOISE transforme vos visions en infrastructures durables. 
-            Expertise reconnue en travaux publics, routes et génie civil à travers tout le Cameroun.
+            ETS N MOISE transforme vos visions en infrastructures durables.
+            Expertise reconnue en travaux publics, routes et génie civil à
+            travers tout le Cameroun.
           </p>
-          
+
           <div className="flex flex-wrap gap-4">
             <a
               href="#devis"
@@ -46,6 +47,12 @@ export default function Hero() {
             >
               Demander un devis
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a
+              href="#contact"
+              className="px-8 py-4 border border-white/20 text-white font-bold uppercase tracking-widest hover:bg-white/10 transition-all"
+            >
+              Contactez-nous
             </a>
             <a
               href="#portfolio"

@@ -1,15 +1,16 @@
-import { motion } from 'motion/react';
-import { HardHat, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { motion } from "motion/react";
+import { HardHat, Menu, X } from "lucide-react";
+import { useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Accueil', href: '#' },
-    { name: 'Expertise', href: '#expertise' },
-    { name: 'Projets', href: '#portfolio' },
-    { name: 'Devis', href: '#devis' },
+    { name: "Accueil", href: "#" },
+    { name: "Expertise", href: "#expertise" },
+    { name: "Projets", href: "#portfolio" },
+    { name: "Devis", href: "#devis" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
@@ -22,7 +23,7 @@ export default function Navbar() {
               ETS N MOISE
             </span>
           </div>
-          
+
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navLinks.map((link) => (
@@ -42,7 +43,11 @@ export default function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-md text-white hover:text-brand-orange focus:outline-none"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
