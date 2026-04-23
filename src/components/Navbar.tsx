@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { HardHat, Menu, X } from "lucide-react";
 import { useState } from "react";
+import logo from "../public/brand/logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center gap-2">
-            <HardHat className="w-8 h-8 text-brand-orange" />
+            {/* <HardHat className="w-8 h-8 text-brand-orange" /> */}
+            <img src={logo} alt="Logo ETS N MOISE" className="h-10 w-auto" />
             <span className="text-xl font-display font-black tracking-tighter uppercase">
               ETS N MOISE
             </span>
