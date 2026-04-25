@@ -1,71 +1,78 @@
-import { motion } from 'motion/react';
-import { useState } from 'react';
+import { motion } from "motion/react";
+import { useState } from "react";
 
 const projects = [
   {
     id: 1,
-    title: 'Pont de la Sanaga',
-    category: 'Génie Civil',
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=800',
+    title: "Pont de la Sanaga",
+    category: "Génie Civil",
+    image:
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 2,
-    title: 'Axe Yaoundé-Douala',
-    category: 'Routes',
-    image: 'https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&q=80&w=800',
+    title: "Axe Yaoundé-Douala",
+    category: "Routes",
+    image:
+      "https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 3,
-    title: 'Complexe Résidentiel Bastos',
-    category: 'Bâtiment',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800',
+    title: "Complexe Résidentiel Bastos",
+    category: "Bâtiment",
+    image:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 4,
-    title: 'Zone Industrielle Kribi',
-    category: 'Génie Civil',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800',
+    title: "Zone Industrielle Kribi",
+    category: "Génie Civil",
+    image:
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 5,
-    title: 'Réfection Urbaine Douala',
-    category: 'Routes',
-    image: 'https://images.unsplash.com/photo-1590486803833-ffc6f78d284b?auto=format&fit=crop&q=80&w=800',
+    title: "Réfection Urbaine Douala",
+    category: "Routes",
+    image:
+      "https://images.unsplash.com/photo-1590486803833-ffc6f78d284b?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 6,
-    title: 'Siège Social Banque',
-    category: 'Bâtiment',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800',
+    title: "Siège Social Banque",
+    category: "Bâtiment",
+    image:
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
-const categories = ['Tous', 'Génie Civil', 'Bâtiment', 'Routes'];
+const categories = ["Tous", "Génie Civil", "Bâtiment", "Routes"];
 
 export default function Portfolio() {
-  const [activeCategory, setActiveCategory] = useState('Tous');
+  const [activeCategory, setActiveCategory] = useState("Tous");
 
-  const filteredProjects = activeCategory === 'Tous' 
-    ? projects 
-    : projects.filter(p => p.category === activeCategory);
+  const filteredProjects =
+    activeCategory === "Tous"
+      ? projects
+      : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="portfolio" className="py-24 bg-brand-black text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="portfolio" className="py-24 bg-brand-white text-white">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent ">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div>
             <h2 className="text-5xl md:text-6xl font-black uppercase italic leading-none mb-6">
               Nos <span className="text-brand-orange">Réalisations</span>
             </h2>
             <div className="flex flex-wrap gap-4 mt-8">
-              {categories.map(cat => (
+              {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={`px-6 py-2 text-sm font-bold uppercase tracking-widest transition-all border ${
-                    activeCategory === cat 
-                      ? 'bg-brand-orange border-brand-orange text-brand-black' 
-                      : 'border-white/20 text-white hover:border-white'
+                    activeCategory === cat
+                      ? "bg-brand-orange border-brand-orange text-brand-black"
+                      : "border-white/20 text-white hover:border-white"
                   }`}
                 >
                   {cat}

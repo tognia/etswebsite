@@ -12,7 +12,7 @@ export default function Hero() {
           className="w-full h-full object-cover opacity-40"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -34,7 +34,7 @@ export default function Hero() {
             <span className="text-brand-orange">avec précision</span>
           </h1>
 
-          <p className="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed">
+          <p className="text-gray-400 text-lg ri mb-10 max-w-lg leading-relaxed">
             ETS N MOISE transforme vos visions en infrastructures durables.
             Expertise reconnue en travaux publics, routes et génie civil à
             travers tout le Cameroun.

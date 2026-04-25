@@ -11,7 +11,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-black text-white pt-24 pb-12 border-t border-white/10">
+    <footer className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent text-blue-950 pt-24 pb-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
@@ -21,7 +21,7 @@ export default function Footer() {
                 ETS N MOISE
               </span>
             </div>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="text-blue-950 leading-relaxed">
               Leader du BTP au Cameroun, nous construisons les infrastructures
               de demain avec rigueur et innovation.
             </p>
@@ -51,7 +51,7 @@ export default function Footer() {
             <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">
               Navigation
             </h4>
-            <ul className="space-y-4 text-gray-400">
+            <ul className="space-y-4 text-blue-950">
               <li>
                 <a
                   href="#"
@@ -99,7 +99,7 @@ export default function Footer() {
             <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">
               Contact
             </h4>
-            <ul className="space-y-4 text-gray-400">
+            <ul className="space-y-4 text-blue-950²">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-brand-orange shrink-0" />
                 <span>Bastos, Yaoundé, Cameroun</span>
@@ -119,7 +119,7 @@ export default function Footer() {
             <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">
               Newsletter
             </h4>
-            <p className="text-gray-400 mb-6">
+            <p className="text-blue-950 mb-6">
               Restez informé de nos derniers projets et innovations.
             </p>
             <form className="flex">
