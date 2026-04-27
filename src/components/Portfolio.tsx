@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import { projects } from "../data/projects"; // Importez vos données
+import { projects } from "../data/projects"; // Assurez-vous que ce fichier existe et exporte une liste de projets
 import { useState } from "react";
 
 const categories = ["Tous", "Génie Civil", "Bâtiment", "Routes"];

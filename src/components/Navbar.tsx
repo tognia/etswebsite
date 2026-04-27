@@ -18,7 +18,7 @@ export default function Navbar() {
     <nav className="fixed top-0 w-full z-50 bg-brand-white text-blue-950 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <a key="Accueil" href="#">
+          <a key="Accueil" href="/">
             <div className="flex items-center gap-2">
               <img src={logo} alt="Logo ETS N MOISE" className="h-20 w-auto" />
               <span className="text-2xl font-display font-black tracking-tighter uppercase italic bg-gradient-to-r from-blue-950 via-sky-300 to-blue-900 bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]">
