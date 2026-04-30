@@ -40,7 +40,7 @@ export default function App() {
             {/* Route dynamique pour les détails de projet */}
             <Route
               path="/project/:id"
-              element={<ProjectDetail params={undefined} />}
+              element={<ProjectDetail />}
             />
           </Routes>
         </main>

@@ -1,20 +1,64 @@
-import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+
+// Tes imports d'images
+import diapo1 from "../public/brand/diapo1.png";
+import diapo2 from "../public/brand/diapo2.png";
+import diapo3 from "../public/brand/diapo3.png";
+import diapo4 from "../public/brand/diapo4.png";
+import diapo5 from "../public/brand/diapo5.png";
+
+const images = [
+  { id: 1, src: diapo1, alt: "Projet BTP 1" },
+  { id: 2, src: diapo2, alt: "Projet BTP 2" },
+  { id: 3, src: diapo3, alt: "Projet BTP 3" },
+  // Ajoute l'image Unsplash par défaut si tu veux la garder dans la boucle
+  { id: 4, src: diapo4, alt: "Projet BTP 4" },
+  { id: 5, src: diapo5, alt: "Projet BTP 5" },
+];
 
 export default function Hero() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Auto-play : Change d'image toutes des 5 secondes
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
   return (
     <section className="relative h-screen flex items-center overflow-hidden bg-brand-black">
-      {/* Background Image with Overlay */}
+      {/* Diaporama Background */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=2070"
-          alt="Construction site"
-          className="w-full h-full object-cover opacity-40"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent" />
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={images[currentIndex].id}
+            src={images[currentIndex].src}
+            alt={images[currentIndex].alt}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 0.4, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2 }}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </AnimatePresence>
+
+        {/* Overlay Dégradé */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent opacity-80" />
       </div>
 
+      {/* Contenu Principal */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -34,7 +78,7 @@ export default function Hero() {
             <span className="text-brand-orange">avec précision</span>
           </h1>
 
-          <p className="text-gray-400 text-lg ri mb-10 max-w-lg leading-relaxed">
+          <p className="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed">
             ETS N MOISE transforme vos visions en infrastructures durables.
             Expertise reconnue en travaux publics, routes et génie civil à
             travers tout le Cameroun.
@@ -49,12 +93,6 @@ export default function Hero() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="#contact"
-              className="px-8 py-4 border border-white/20 text-white font-bold uppercase tracking-widest hover:bg-white/10 transition-all"
-            >
-              Contactez-nous
-            </a>
-            <a
               href="#portfolio"
               className="px-8 py-4 border border-white/20 text-white font-bold uppercase tracking-widest hover:bg-white/10 transition-all"
             >
@@ -64,8 +102,26 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Decorative vertical line */}
-      <div className="absolute right-10 bottom-0 top-0 w-px bg-white/10 hidden lg:block" />
+      {/* Contrôles Manuels (Flèches) */}
+      <div className="absolute bottom-10 right-10 z-20 flex gap-4">
+        <button
+          onClick={prevSlide}
+          className="p-3 border border-white/20 text-white hover:bg-brand-orange hover:text-black transition-all"
+          aria-label="Précédent"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="p-3 border border-white/20 text-white hover:bg-brand-orange hover:text-black transition-all"
+          aria-label="Suivant"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+      </div>
+
+      {/* Ligne décorative */}
+      <div className="absolute right-24 bottom-0 top-0 w-px bg-white/10 hidden lg:block" />
     </section>
   );
 }
