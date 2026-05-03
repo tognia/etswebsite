@@ -1,17 +1,17 @@
+import nphlmainlab from "../public/brand/nphlmainlab.png";
+import diapo1 from "../public/brand/diapo1.png";
 export const projects = [
   {
     id: 1,
-    title: "Pont de la Sanaga",
-    category: "Génie Civil",
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=800",
+    title: "Laboratoire National de Santé Publique -  Yaoundé - Cameroun",
+    category: "Bâtiment",
+    image: nphlmainlab,
   },
   {
     id: 2,
-    title: "Axe Yaoundé-Douala",
-    category: "Routes",
-    image:
-      "https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&q=80&w=800",
+    title: "Training Laboratory -  Yaoundé - Cameroon",
+    category: "Bâtiment",
+    image: diapo1,
   },
   {
     id: 3,
