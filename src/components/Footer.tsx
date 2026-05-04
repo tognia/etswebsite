@@ -11,7 +11,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent text-blue-950 pt-24 pb-12 border-t border-white/10">
+    <footer className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-300 via-blue-300 to-transparent text-blue-950 pt-24 pb-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
@@ -106,11 +106,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-brand-orange shrink-0" />
-                <span>+237 6XX XX XX XX</span>
+                <span>+237 699 87 82 71 / +267 699 45 67 00</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-brand-orange shrink-0" />
-                <span>contact@ets-n-moise.cm</span>
+                <span>ngnokamoise@yahoo.fr</span>
               </li>
             </ul>
           </div>

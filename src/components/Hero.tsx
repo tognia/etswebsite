@@ -55,7 +55,7 @@ export default function Hero() {
         </AnimatePresence>
 
         {/* Overlay Dégradé */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent opacity-10" />
       </div>
 
       {/* Contenu Principal */}

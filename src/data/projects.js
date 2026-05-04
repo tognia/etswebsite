@@ -1,5 +1,6 @@
 import nphlmainlab from "../public/brand/nphlmainlab.png";
 import diapo1 from "../public/brand/diapo1.png";
+import maroua from "../public/brand/maroua.png";
 export const projects = [
   {
     id: 1,
@@ -15,10 +16,9 @@ export const projects = [
   },
   {
     id: 3,
-    title: "Complexe Résidentiel Bastos",
+    title: "Logement Etudiants - Maroua - Cameroun",
     category: "Bâtiment",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
+    image: maroua,
   },
   {
     id: 4,
