@@ -84,7 +84,7 @@ export default function ContactForm() {
                 <div>
                   <h4 className="font-bold uppercase mb-1">Localisation</h4>
                   <p className="text-gray-500 text-sm">
-                    Bastos, Yaoundé, Cameroun
+                    Eleveur, Yaoundé, Cameroun
                   </p>
                 </div>
               </div>
@@ -94,7 +94,9 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="font-bold uppercase mb-1">Téléphone</h4>
-                  <p className="text-gray-500 text-sm">+237 6XX XX XX XX</p>
+                  <p className="text-gray-500 text-sm">
+                    +237 699 87 82 71 / +267 699 45 67 00
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">

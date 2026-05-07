@@ -73,11 +73,14 @@ export default function DevisForm() {
   }
 
   return (
-    <section id="devis" className="py-24 bg-gray-50">
+    <section
+      id="devis"
+      className="py-24 bg-gradient-to-r from-blue-300 via-orange-300 to-transparent"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
-            <h2 className="text-5xl md:text-6xl font-black uppercase italic leading-none mb-8">
+            <h2 className="text-5xl md:text-6xl text-blue-950 uppercase italic leading-none mb-8">
               Demander un <span className="text-brand-orange">Devis</span>
             </h2>
             <p className="text-gray-600 text-lg mb-12 leading-relaxed">

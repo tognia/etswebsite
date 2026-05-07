@@ -38,7 +38,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-screen flex items-center overflow-hidden bg-brand-black">
+    <section className="relative h-screen flex items-center overflow-hidden bg-blue-950">
       {/* Diaporama Background */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
@@ -55,7 +55,7 @@ export default function Hero() {
         </AnimatePresence>
 
         {/* Overlay Dégradé */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent opacity-10" />
+        <div className="absolute inset-0 " />
       </div>
 
       {/* Contenu Principal */}

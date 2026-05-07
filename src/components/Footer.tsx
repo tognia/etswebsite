@@ -11,7 +11,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-300 via-blue-300 to-transparent text-blue-950 pt-24 pb-12 border-t border-white/10">
+    <footer className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-500 via-blue-300 to-transparent text-blue-950 pt-24 pb-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
@@ -102,7 +102,7 @@ export default function Footer() {
             <ul className="space-y-4 text-blue-950²">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-brand-orange shrink-0" />
-                <span>Bastos, Yaoundé, Cameroun</span>
+                <span>Eleveur, Yaoundé, Cameroun</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-brand-orange shrink-0" />

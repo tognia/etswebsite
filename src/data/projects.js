@@ -1,6 +1,8 @@
 import nphlmainlab from "../public/brand/nphlmainlab.png";
 import diapo1 from "../public/brand/diapo1.png";
 import maroua from "../public/brand/maroua.png";
+import cathedrale from "../public/brand/cathedrale.png";
+
 export const projects = [
   {
     id: 1,
@@ -29,10 +31,9 @@ export const projects = [
   },
   {
     id: 5,
-    title: "Réfection Urbaine Douala",
+    title: "Cathédrale de Maroua - Cameroun",
     category: "Routes",
-    image:
-      "https://images.unsplash.com/photo-1590486803833-ffc6f78d284b?auto=format&fit=crop&q=80&w=800",
+    image: cathedrale,
   },
   {
     id: 6,

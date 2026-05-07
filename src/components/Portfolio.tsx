@@ -15,7 +15,7 @@ export default function Portfolio() {
 
   return (
     <section id="portfolio" className="py-24 bg-brand-white text-white">
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent ">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-300 via-blue-950 to-transparent">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div>
             <h2 className="text-5xl md:text-6xl font-black uppercase italic leading-none mb-6">
