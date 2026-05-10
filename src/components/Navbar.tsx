@@ -1,10 +1,24 @@
-import { motion } from "motion/react";
-import { HardHat, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Menu, X, Instagram } from "lucide-react";
+import { useState, useEffect } from "react";
 import logo from "../public/brand/logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { name: "Accueil", href: "#" },
@@ -15,68 +29,109 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-brand-white text-blue-950 border-b border-white/10">
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-brand-white/80 backdrop-blur-md shadow-lg border-b border-blue-950/10 py-2"
+          : "bg-transparent py-4"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <a key="Accueil" href="/">
-            <div className="flex items-center gap-2">
-              <img src={logo} alt="Logo ETS N MOISE" className="h-20 w-auto" />
-              <span className="text-2xl font-display font-black tracking-tighter uppercase italic bg-gradient-to-r from-blue-950 via-sky-300 to-blue-900 bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]">
-                ETS N MOISE
-              </span>
-            </div>
+          {/* Logo Section */}
+          <a key="Accueil" href="/" className="flex items-center gap-2 group">
+            <img
+              src={logo}
+              alt="Logo ETS N MOISE"
+              className={`transition-all duration-500 ${scrolled ? "h-14" : "h-20"} w-auto`}
+            />
+            <span
+              className={`text-2xl font-display font-black tracking-tighter uppercase italic bg-gradient-to-r from-blue-950 via-sky-600 to-blue-900 bg-clip-text text-transparent drop-shadow-sm transition-opacity duration-500 ${!scrolled && "opacity-90"}`}
+            >
+              ETS N MOISE
+            </span>
           </a>
 
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <div className="flex items-baseline space-x-8">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-sm font-medium hover:text-brand-orange transition-colors uppercase tracking-widest"
+                  className={`text-sm font-bold transition-colors uppercase tracking-widest hover:text-brand-orange ${
+                    scrolled ? "text-blue-950" : "text-white drop-shadow-md"
+                  }`}
                 >
                   {link.name}
                 </a>
               ))}
             </div>
+
+            {/* Instagram Icon */}
+            <a
+              href="https://instagram.com/your-profile"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-2 rounded-full transition-all duration-300 ${
+                scrolled
+                  ? "bg-blue-950 text-white hover:bg-brand-orange"
+                  : "bg-white/20 text-white hover:bg-white hover:text-blue-950 backdrop-blur-sm"
+              }`}
+              aria-label="Instagram"
+            >
+              <Instagram className="w-5 h-5" />
+            </a>
           </div>
 
-          <div className="md:hidden">
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center gap-4">
+            <a
+              href="https://instagram.com/your-profile"
+              className={scrolled ? "text-blue-950" : "text-white"}
+            >
+              <Instagram className="w-6 h-6" />
+            </a>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-blue-950 hover:text-brand-orange focus:outline-none"
+              className={`p-2 rounded-md focus:outline-none ${
+                scrolled ? "text-blue-950" : "text-white"
+              }`}
             >
               {isOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-7 h-7" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-7 h-7" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-brand-white border-b border-white/10"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="block px-3 py-2 text-base font-medium hover:text-brand-orange transition-colors uppercase tracking-widest"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </motion.div>
-      )}
+      {/* Mobile menu Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-b border-blue-950/10 overflow-hidden"
+          >
+            <div className="px-4 pt-4 pb-6 space-y-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="block px-3 py-3 text-lg font-bold text-blue-950 hover:bg-blue-50 rounded-lg transition-colors uppercase tracking-widest"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

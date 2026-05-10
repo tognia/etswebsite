@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom";
-import { projects } from "../../../data/projects"; // Assurez-vous que le chemin est correct
+import { projects } from "../../../data/projects";
+// Import Swiper React components et styles
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function ProjectDetail() {
-  // 1. On récupère l'id depuis l'URL avec React Router
-  const { id } = useParams(); 
-  
-  // 2. On cherche le projet (on convertit l'ID de string à nombre si nécessaire)
+  const { id } = useParams();
   const project = projects.find((p) => p.id === parseInt(id));
 
-  // 3. Gestion simple si le projet n'existe pas
   if (!project) {
     return (
       <div className="pt-32 px-8">
@@ -17,18 +19,43 @@ export default function ProjectDetail() {
     );
   }
 
+  // On récupère le tableau d'images ou on crée un tableau avec l'image unique par défaut
+  const gallery = project.images || [project.image];
+
   return (
-    <div className="pt-32 px-8">
+    <div className="pt-32 px-8 max-w-7xl mx-auto text-white">
       <h1 className="text-6xl font-black uppercase text-brand-orange">
         {project.title}
       </h1>
-      <p className="text-xl mt-4">{project.category}</p>
-      <img 
-        src={project.image} 
-        alt={project.title} 
-        className="w-full h-[500px] object-cover mt-8 rounded-lg"
-      />
-      {/* Votre contenu ici */}
+      <p className="text-xl mt-4 opacity-80">{project.category}</p>
+
+      {/* Carrousel d'images */}
+      <div className="mt-8 rounded-lg overflow-hidden border border-white/10">
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={10}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 5000 }}
+          className="h-[500px] w-full"
+        >
+          {gallery.map((img, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={img}
+                alt={`${project.title} - vue ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      <div className="mt-12 prose prose-invert">
+        <h2 className="text-2xl font-bold">À propos du projet</h2>
+        <p>Description détaillée des travaux de {project.category} effectués...</p>
+      </div>
     </div>
   );
 }

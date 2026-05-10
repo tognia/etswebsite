@@ -22,11 +22,11 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-blue-950 leading-relaxed">
-              Leader du BTP au Cameroun, nous construisons les infrastructures
-              de demain avec rigueur et innovation.
+              Nous construisons les infrastructures de demain avec rigueur et
+              innovation.
             </p>
             <div className="flex gap-4">
-              <a
+              {/* <a
                 href="#"
                 className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all"
               >
@@ -37,7 +37,7 @@ export default function Footer() {
                 className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all"
               >
                 <Linkedin className="w-5 h-5" />
-              </a>
+              </a> */}
               <a
                 href="#"
                 className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all"

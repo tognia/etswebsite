@@ -3,6 +3,7 @@ import { Send, CheckCircle2, Loader2, Phone, Mail, MapPin } from "lucide-react";
 import { useState, FormEvent } from "react";
 import { db } from "../lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import emailjs from "@emailjs/browser";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<
@@ -20,20 +21,32 @@ export default function ContactForm() {
     setStatus("loading");
 
     try {
+      // ÉTAPE 1 : Sauvegarde dans Firebase (Gratuit)
       await addDoc(collection(db, "messages"), {
         ...formData,
         createdAt: serverTimestamp(),
       });
 
+      // ÉTAPE 2 : Envoi de l'e-mail via EmailJS (Gratuit)
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: "ETS N MOISE Admin",
+      };
+
+      await emailjs.send(
+        "service_yd04vnd",
+        "template_nliubov",
+        templateParams,
+        "64OzMVOIAQNnD2fMr",
+      );
+
       setStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
+      setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error("Erreur lors de l'envoi:", error);
       setStatus("error");
     }
   };
@@ -68,7 +81,7 @@ export default function ContactForm() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
-            <h2 className="text-5xl md:text-6xl font-black uppercase italic leading-none mb-8">
+            <h2 className="text-5xl md:text-6xl text-blue-950 uppercase italic leading-none mb-8">
               Contactez <span className="text-brand-orange">Nous</span>
             </h2>
             <p className="text-gray-600 text-lg mb-12 leading-relaxed">
@@ -105,9 +118,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="font-bold uppercase mb-1">Email</h4>
-                  <p className="text-gray-500 text-sm">
-                    contact@ets-n-moise.cm
-                  </p>
+                  <p className="text-gray-500 text-sm">ngnokamoise@yahoo.fr</p>
                 </div>
               </div>
             </div>

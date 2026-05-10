@@ -3,6 +3,7 @@ import { Send, Upload, CheckCircle2, Loader2 } from "lucide-react";
 import { useState, FormEvent } from "react";
 import { db } from "../lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import emailjs from "@emailjs/browser";
 
 export default function DevisForm() {
   const [status, setStatus] = useState<
@@ -22,9 +23,8 @@ export default function DevisForm() {
     setStatus("loading");
 
     try {
-      // Note: File upload to Storage would typically happen here,
-      // then the URL would be saved to Firestore.
-      // For now, we save the form data.
+      // ÉTAPE 1 : Sauvegarde dans Firestore (Base de données)
+      // Note: Si vous ajoutez Firebase Storage plus tard, l'URL du fichier ira ici
       await addDoc(collection(db, "quotes"), {
         ...formData,
         fileName: file ? file.name : null,
@@ -32,6 +32,25 @@ export default function DevisForm() {
         status: "pending",
       });
 
+      // ÉTAPE 2 : Envoi de l'e-mail de notification via EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        work_type: formData.type, // Type de travaux (Génie Civil, etc.)
+        budget: formData.budget,
+        message: formData.message,
+        file_name: file ? file.name : "Aucun fichier joint",
+        to_name: "Direction ETS N MOISE",
+      };
+
+      await emailjs.send(
+        "service_yd04vnd",
+        "template_yo9qfiw",
+        templateParams,
+        "64OzMVOIAQNnD2fMr",
+      );
+
+      // ÉTAPE 3 : Réinitialisation du formulaire
       setStatus("success");
       setFormData({
         name: "",
@@ -42,7 +61,7 @@ export default function DevisForm() {
       });
       setFile(null);
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error("Erreur lors de la procédure de devis:", error);
       setStatus("error");
     }
   };
