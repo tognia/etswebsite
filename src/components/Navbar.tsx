@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Instagram } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "../public/brand/logo.png";
+import { HashLink } from "react-router-hash-link";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,11 +22,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Accueil", href: "#" },
-    { name: "Expertise", href: "#expertise" },
-    { name: "Projets", href: "#portfolio" },
-    { name: "Devis", href: "#devis" },
-    { name: "Contact", href: "#contact" },
+    { name: "Accueil", href: "/" },
+    { name: "Expertise", href: "/#expertise" },
+    { name: "Projets", href: "/#portfolio" },
+    { name: "Devis", href: "/#devis" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -56,21 +57,21 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <div className="flex items-baseline space-x-8">
               {navLinks.map((link) => (
-                <a
+                <HashLink
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   className={`text-sm font-bold transition-colors uppercase tracking-widest hover:text-brand-orange ${
                     scrolled ? "text-blue-950" : "text-white drop-shadow-md"
                   }`}
                 >
                   {link.name}
-                </a>
+                </HashLink>
               ))}
             </div>
 
             {/* Instagram Icon */}
             <a
-              href="https://instagram.com/your-profile"
+              href="https://www.instagram.com/etsnmoise"
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-full transition-all duration-300 ${
@@ -87,7 +88,8 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-4">
             <a
-              href="https://instagram.com/your-profile"
+              href="https://www.instagram.com/etsnmoise"
+              target="_blank"
               className={scrolled ? "text-blue-950" : "text-white"}
             >
               <Instagram className="w-6 h-6" />

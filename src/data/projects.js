@@ -24,6 +24,9 @@ import training_1 from "../public/brand/training_1.png";
 import training_2 from "../public/brand/training_2.png";
 import training_3 from "../public/brand/training_3.png";
 import training_4 from "../public/brand/training_4.png";
+import tcholere from "../public/brand/tcholere.png";
+import tcholere_1 from "../public/brand/tcholere_1.png";
+import tcholere_2 from "../public/brand/tcholere_2.png";
 
 export const projects = [
   {
@@ -75,12 +78,9 @@ export const projects = [
   },
   {
     id: 6,
-    title: "Maternité de Mokolo - Cameroun",
+    title: "Maternité de TCHOLERE - Cameroun",
     category: "Bâtiment",
-    images: [
-      laboratory,
-      "https://images.unsplash.com/photo-1515263487990-61b07816b324",
-    ],
-    image: laboratory,
+    images: [tcholere, tcholere_1, tcholere_2],
+    image: tcholere,
   },
 ];

@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { HashLink } from "react-router-hash-link";
 import {
   HardHat,
   Mail,
@@ -39,7 +40,8 @@ export default function Footer() {
                 <Linkedin className="w-5 h-5" />
               </a> */}
               <a
-                href="#"
+                href="https://www.instagram.com/etsnmoise"
+                target="_blank"
                 className="p-2 border border-white/10 hover:border-brand-orange hover:text-brand-orange transition-all"
               >
                 <Instagram className="w-5 h-5" />
@@ -53,44 +55,44 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4 text-blue-950">
               <li>
-                <a
-                  href="#"
+                <HashLink
+                  to="/"
                   className="hover:text-brand-orange transition-colors"
                 >
                   Accueil
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a
-                  href="#expertise"
+                <HashLink
+                  to="/#expertise"
                   className="hover:text-brand-orange transition-colors"
                 >
                   Expertise
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a
-                  href="#portfolio"
+                <HashLink
+                  to="/#portfolio"
                   className="hover:text-brand-orange transition-colors"
                 >
                   Nos Projets
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a
-                  href="#devis"
+                <HashLink
+                  to="/#devis"
                   className="hover:text-brand-orange transition-colors"
                 >
                   Demander un Devis
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a
-                  href="#contact"
+                <HashLink
+                  to="/#contact"
                   className="hover:text-brand-orange transition-colors"
                 >
                   Contactez-nous
-                </a>
+                </HashLink>
               </li>
             </ul>
           </div>
@@ -138,7 +140,10 @@ export default function Footer() {
         <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500">
           <p>© {new Date().getFullYear()} ETS N MOISE. Tous droits réservés.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">
+            <a
+              href="/mentions-legales"
+              className="hover:text-white transition-colors"
+            >
               Mentions Légales
             </a>
             <a href="#" className="hover:text-white transition-colors">
