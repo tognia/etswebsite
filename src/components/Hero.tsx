@@ -72,6 +72,12 @@ export default function Hero() {
               Génie Civil & BTP au Cameroun
             </span>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
 
           <h1 className="text-6xl md:text-8xl font-display font-black text-white leading-[0.9] mb-8 uppercase italic">
             Bâtir l'avenir <br />

@@ -32,6 +32,8 @@ export const projects = [
   {
     id: 1,
     title: "Laboratoire National de Santé Publique -  Yaoundé - Cameroun",
+    description:
+      "TRAVAUX RENOVATION NPHL FINANCÉ PAR USA-CDC YAOUNDE MESSA CAMEROUN - TRAVAUX CONTRÔLÉS PAR ZIAS",
     category: "Bâtiment",
     images: [nphlmainlab, nphl_1, nphl_2, nphl_3, nphl_4],
     image: nphlmainlab,
@@ -39,20 +41,26 @@ export const projects = [
   {
     id: 2,
     title: "Training Laboratory -  Yaoundé - Cameroon",
+    description:
+      "TRAVAUX DE CONSTRUCTION D'UN LABORATOIRE DE FORMATION FINANCÉ PAR USAID YAOUNDE MESSA CAMEROUN - TRAVAUX CONTRÔLÉS PAR ZIAS",
     category: "Bâtiment",
     images: [training_0, training_1, training_2, training_3, training_4],
     image: training_0,
   },
   {
     id: 3,
-    title: "Logement Etudiants - Maroua - Cameroun",
+    title: "Maison Cinquantenaire - Logement Missionnaires - Maroua - Cameroun",
+    description:
+      "TRAVAUX DE CONSTRUCTION D'UNE MAISON DE CINQUANTENAIRE POUR LOGEMENT DES MISSIONNAIRES - DIOCESE DE MAROUA",
     category: "Bâtiment",
     images: [maroua, maroua_1, maroua_2, maroua_3],
     image: maroua,
   },
   {
     id: 4,
-    title: "Lanavet - Garoua - Cameroun",
+    title: "Lanavet -Douala & Garoua - Cameroun",
+    description:
+      "TRAVAUX RENOVATION DU LABORATOIRE NATIONAL VETERINAIRE (LANAVET) A DOUALA ET GAROUA TRAVAUX FINANCES PAR DTRA ARMEE AMERICAINE ASSITES DE L’AMBASSADE DES USA ",
     category: "Génie Civil",
     images: [
       lanavetgaroua,
@@ -66,7 +74,7 @@ export const projects = [
   {
     id: 5,
     title: "Cathédrale de Maroua - Cameroun",
-    category: "Routes",
+    category: "Génie Civil",
     images: [
       cathedrale,
       cathedrale_0,
