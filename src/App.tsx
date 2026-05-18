@@ -13,6 +13,7 @@ import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ProjectDetail from "./app/project/[id]/page"; // Assurez-vous que ce fichier existe
+import DevisPage from "./app/devisPage";
 
 export default function App() {
   return (
@@ -38,10 +39,10 @@ export default function App() {
             />
 
             {/* Route dynamique pour les détails de projet */}
-            <Route
-              path="/project/:id"
-              element={<ProjectDetail />}
-            />
+            <Route path="/project/:id" element={<ProjectDetail />} />
+
+            {/* Route pour la page de demande de devis */}
+            <Route path="/devisPage" element={<DevisPage />} />
           </Routes>
         </main>
 

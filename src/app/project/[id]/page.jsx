@@ -44,7 +44,7 @@ export default function ProjectDetail() {
           <div className="flex flex-col gap-4 border-l-4 border-orange-500 pl-6 mb-2">
             <div className="flex items-center text-slate-600">
               <MapPin className="mr-2 h-5 w-5 text-cyan-900" />
-              <span className="font-medium">Cameroun</span>
+              <span className="font-medium">{project.location}</span>
             </div>
             <div className="flex items-center text-slate-600">
               <ShieldCheck className="mr-2 h-5 w-5 text-cyan-900" />
@@ -100,13 +100,17 @@ export default function ProjectDetail() {
                 <Calendar className="mr-4 h-6 w-6 text-orange-600" />
                 <div>
                   <p className="text-sm text-slate-400 uppercase font-bold tracking-tighter">Statut</p>
-                  <p className="text-lg font-semibold text-cyan-900 italic">Livré / En cours</p>
+                  <p className="text-lg font-semibold text-cyan-900 italic">{project.status}</p>
                 </div>
               </div>
             </div>
             
             <button className="w-full mt-8 bg-cyan-950 text-white py-4 rounded-xl font-bold hover:bg-orange-600 transition-colors duration-300">
-              Demander un devis similaire
+              
+              <Link to={`/devisPage`} >
+              Demander un devis
+              </Link>
+           
             </button>
           </div>
 

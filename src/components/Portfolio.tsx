@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { projects } from "../data/projects"; // Assurez-vous que ce fichier existe et exporte une liste de projets
 import { useState } from "react";
 
-const categories = ["Tous", "Génie Civil", "Bâtiment", "Routes"];
+const categories = [""]; //"Tous","Génie Civil", "Bâtiment", "Infrastructures", "Autres"
 
 export default function Portfolio() {
-  const [activeCategory, setActiveCategory] = useState("Tous");
+  const [activeCategory, setActiveCategory] = useState("");
 
   const filteredProjects =
-    activeCategory === "Tous"
+    activeCategory === ""
       ? projects
       : projects.filter((p) => p.category === activeCategory);
 
@@ -21,7 +21,7 @@ export default function Portfolio() {
             <h2 className="text-5xl md:text-6xl font-black uppercase italic leading-none mb-6">
               Nos <span className="text-brand-orange">Réalisations</span>
             </h2>
-            <div className="flex flex-wrap gap-4 mt-8">
+            {/* <div className="flex flex-wrap gap-4 mt-8">
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -35,7 +35,7 @@ export default function Portfolio() {
                   {cat}
                 </button>
               ))}
-            </div>
+            </div> */}
           </div>
           <div className="text-8xl font-black text-white/5 select-none hidden lg:block">
             02

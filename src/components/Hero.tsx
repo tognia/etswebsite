@@ -68,9 +68,9 @@ export default function Hero() {
         >
           <div className="flex items-center gap-2 mb-6">
             <div className="h-px w-12 bg-brand-orange" />
-            <span className="text-brand-orange font-bold tracking-[0.3em] uppercase text-sm">
+            {/* <span className="text-brand-orange font-bold tracking-[0.3em] uppercase text-sm">
               Génie Civil & BTP au Cameroun
-            </span>
+            </span> */}
           </div>
           <br />
           <br />
@@ -79,15 +79,16 @@ export default function Hero() {
           <br />
           <br />
 
-          <h1 className="text-6xl md:text-8xl font-display font-black text-white leading-[0.9] mb-8 uppercase italic">
-            Bâtir l'avenir <br />
-            <span className="text-brand-orange">avec précision</span>
+          <h1 className="text-5xl md:text-6xl font-display font-black text-white leading-[0.9] mb-8 uppercase italic">
+            Bâtir
+            <br />
+            <span className="text-brand-orange">avec assurrance</span>
           </h1>
 
-          <p className="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed">
+          <p className="text-blue-950 text-lg mb-10 max-w-lg leading-relaxed">
             ETS N MOISE transforme vos visions en infrastructures durables.
-            Expertise reconnue en travaux publics, routes et génie civil à
-            travers tout le Cameroun.
+            Expertise reconnue en travaux publics et génie civil à travers tout
+            le Cameroun.
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -127,7 +128,7 @@ export default function Hero() {
       </div>
 
       {/* Ligne décorative */}
-      <div className="absolute right-24 bottom-0 top-0 w-px bg-white/10 hidden lg:block" />
+      {/* <div className="absolute right-24 bottom-0 top-0 w-px bg-white/10 hidden lg:block" /> */}
     </section>
   );
 }

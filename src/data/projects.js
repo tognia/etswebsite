@@ -31,34 +31,40 @@ import tcholere_2 from "../public/brand/tcholere_2.png";
 export const projects = [
   {
     id: 1,
-    title: "Laboratoire National de Santé Publique -  Yaoundé - Cameroun",
+    title: "Laboratoire National de Santé Publique",
     description:
-      "TRAVAUX RENOVATION NPHL FINANCÉ PAR USA-CDC YAOUNDE MESSA CAMEROUN - TRAVAUX CONTRÔLÉS PAR ZIAS",
+      "TRAVAUX RENOVATION NPHL FINANCÉ PAR USA-CDC - TRAVAUX CONTRÔLÉS PAR ZIAS",
     category: "Bâtiment",
     images: [nphlmainlab, nphl_1, nphl_2, nphl_3, nphl_4],
     image: nphlmainlab,
+    location: "Yaoundé MESSA, Cameroun",
+    status: "Livré",
   },
   {
     id: 2,
-    title: "Training Laboratory -  Yaoundé - Cameroon",
+    title: "Training Laboratory",
     description:
-      "TRAVAUX DE CONSTRUCTION D'UN LABORATOIRE DE FORMATION FINANCÉ PAR USAID YAOUNDE MESSA CAMEROUN - TRAVAUX CONTRÔLÉS PAR ZIAS",
+      "TRAVAUX DE CONSTRUCTION D'UN LABORATOIRE DE FORMATION FINANCÉ PAR USAID - TRAVAUX CONTRÔLÉS PAR ZIAS",
     category: "Bâtiment",
     images: [training_0, training_1, training_2, training_3, training_4],
     image: training_0,
+    location: "Yaoundé MESSA, Cameroun",
+    status: "Livré",
   },
   {
     id: 3,
-    title: "Maison Cinquantenaire - Logement Missionnaires - Maroua - Cameroun",
+    title: "Maison Cinquantenaire - Logement Missionnaires",
     description:
       "TRAVAUX DE CONSTRUCTION D'UNE MAISON DE CINQUANTENAIRE POUR LOGEMENT DES MISSIONNAIRES - DIOCESE DE MAROUA",
     category: "Bâtiment",
     images: [maroua, maroua_1, maroua_2, maroua_3],
     image: maroua,
+    location: "Maroua, Cameroun",
+    status: "Livré",
   },
   {
     id: 4,
-    title: "Lanavet -Douala & Garoua - Cameroun",
+    title: "RENOVATION LANAVET - DOUALA & GAROUA",
     description:
       "TRAVAUX RENOVATION DU LABORATOIRE NATIONAL VETERINAIRE (LANAVET) A DOUALA ET GAROUA TRAVAUX FINANCES PAR DTRA ARMEE AMERICAINE ASSITES DE L’AMBASSADE DES USA ",
     category: "Génie Civil",
@@ -70,6 +76,8 @@ export const projects = [
       lanavetgaroua_4,
     ],
     image: lanavetgaroua,
+    location: "Douala & Garoua, Cameroun",
+    status: "Livré",
   },
   {
     id: 5,
@@ -83,6 +91,8 @@ export const projects = [
       cathedrale_3,
     ],
     image: cathedrale,
+    location: "Maroua - Cameroun",
+    status: "Livré",
   },
   {
     id: 6,
@@ -90,5 +100,7 @@ export const projects = [
     category: "Bâtiment",
     images: [tcholere, tcholere_1, tcholere_2],
     image: tcholere,
+    location: "Tcholere - Cameroun",
+    status: "Livré",
   },
 ];
