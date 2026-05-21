@@ -80,7 +80,7 @@ export default function Footer() {
               </li>
               <li>
                 <HashLink
-                  to="/#devis"
+                  to="/devisPage"
                   className="hover:text-brand-orange transition-colors"
                 >
                   Demander un Devis

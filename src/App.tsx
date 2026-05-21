@@ -32,7 +32,7 @@ export default function App() {
                   <Hero />
                   <Expertise />
                   <Portfolio />
-                  <DevisForm />
+                  {/* <DevisForm /> */}
                   <ContactForm />
                 </>
               }

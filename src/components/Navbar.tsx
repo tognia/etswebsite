@@ -3,6 +3,7 @@ import { Menu, X, Instagram } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "../public/brand/logo.png";
 import { HashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +26,7 @@ export default function Navbar() {
     { name: "Accueil", href: "/" },
     { name: "Expertise", href: "/#expertise" },
     { name: "Projets", href: "/#portfolio" },
-    { name: "Devis", href: "/#devis" },
+    { name: "Devis", href: "/devisPage" },
     { name: "Contact", href: "/#contact" },
   ];
 

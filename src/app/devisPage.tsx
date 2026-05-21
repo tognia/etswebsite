@@ -24,12 +24,12 @@ export default function DevisPage() {
 
     try {
       // ÉTAPE 1 : Sauvegarde dans Firestore (Base de données)
-      await addDoc(collection(db, "quotes"), {
-        ...formData,
-        fileName: file ? file.name : null,
-        createdAt: serverTimestamp(),
-        status: "pending",
-      });
+      // await addDoc(collection(db, "quotes"), {
+      //   ...formData,
+      //   fileName: file ? file.name : null,
+      //   createdAt: serverTimestamp(),
+      //   status: "pending",
+      // });
 
       // ÉTAPE 2 : Envoi de l'e-mail de notification via EmailJS
       const templateParams = {

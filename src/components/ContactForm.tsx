@@ -22,10 +22,10 @@ export default function ContactForm() {
 
     try {
       // ÉTAPE 1 : Sauvegarde dans Firebase (Gratuit)
-      await addDoc(collection(db, "messages"), {
-        ...formData,
-        createdAt: serverTimestamp(),
-      });
+      // await addDoc(collection(db, "messages"), {
+      //   ...formData,
+      //   createdAt: serverTimestamp(),
+      // });
 
       // ÉTAPE 2 : Envoi de l'e-mail via EmailJS (Gratuit)
       const templateParams = {
