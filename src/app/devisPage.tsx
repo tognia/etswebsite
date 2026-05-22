@@ -181,7 +181,7 @@ export default function DevisPage() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                      Adresse Email
+                      Tel.
                     </label>
                     <input
                       required
@@ -191,7 +191,7 @@ export default function DevisPage() {
                         setFormData({ ...formData, telephone: e.target.value })
                       }
                       className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors font-medium text-blue-950"
-                      placeholder="contact@entreprise.com"
+                      placeholder="07 00 00 00"
                     />
                   </div>
                   <div className="space-y-2">
