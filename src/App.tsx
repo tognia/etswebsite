@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ProjectDetail from "./app/project/[id]/page"; // Assurez-vous que ce fichier existe
 import DevisPage from "./app/devisPage";
+import ProjectsPage from "./app/projectsPage"; // Assurez-vous que ce fichier existe
 
 export default function App() {
   return (
@@ -43,6 +44,8 @@ export default function App() {
 
             {/* Route pour la page de demande de devis */}
             <Route path="/devisPage" element={<DevisPage />} />
+            {/* Route pour la page de projets */}
+            <Route path="/projectsPage" element={<ProjectsPage />} />
           </Routes>
         </main>
 
