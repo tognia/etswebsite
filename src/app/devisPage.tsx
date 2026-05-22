@@ -12,6 +12,7 @@ export default function DevisPage() {
   const [file, setFile] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     name: "",
+    telephone: "",
     email: "",
     type: "Génie Civil",
     budget: "",
@@ -34,6 +35,7 @@ export default function DevisPage() {
       // ÉTAPE 2 : Envoi de l'e-mail de notification via EmailJS
       const templateParams = {
         from_name: formData.name,
+        from_telephone: formData.telephone,
         from_email: formData.email,
         work_type: formData.type,
         budget: formData.budget,
@@ -53,6 +55,7 @@ export default function DevisPage() {
       setStatus("success");
       setFormData({
         name: "",
+        telephone: "",
         email: "",
         type: "Génie Civil",
         budget: "",
@@ -174,6 +177,21 @@ export default function DevisPage() {
                       }
                       className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors font-medium text-blue-950"
                       placeholder="Ex: Haisam Construction ou M. Ndong"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
+                      Adresse Email
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      value={formData.telephone}
+                      onChange={(e) =>
+                        setFormData({ ...formData, telephone: e.target.value })
+                      }
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors font-medium text-blue-950"
+                      placeholder="contact@entreprise.com"
                     />
                   </div>
                   <div className="space-y-2">

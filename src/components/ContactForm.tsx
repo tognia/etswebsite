@@ -11,6 +11,7 @@ export default function ContactForm() {
   >("idle");
   const [formData, setFormData] = useState({
     name: "",
+    telephone: "",
     email: "",
     subject: "",
     message: "",
@@ -30,6 +31,7 @@ export default function ContactForm() {
       // ÉTAPE 2 : Envoi de l'e-mail via EmailJS (Gratuit)
       const templateParams = {
         from_name: formData.name,
+        from_telephone: formData.telephone,
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
@@ -44,7 +46,13 @@ export default function ContactForm() {
       );
 
       setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({
+        name: "",
+        telephone: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
     } catch (error) {
       console.error("Erreur lors de l'envoi:", error);
       setStatus("error");
@@ -140,6 +148,21 @@ export default function ContactForm() {
                     }
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors"
                     placeholder="Jean Dupont"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
+                    Telephone
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    value={formData.telephone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, telephone: e.target.value })
+                    }
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors"
+                    placeholder="Numéro de téléphone"
                   />
                 </div>
                 <div className="space-y-2">

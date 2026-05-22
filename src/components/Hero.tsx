@@ -85,10 +85,12 @@ export default function Hero() {
             <span className="text-brand-orange">avec assurrance</span>
           </h1>
 
-          <p className="text-blue-950 text-lg mb-10 max-w-lg leading-relaxed">
-            ETS N MOISE transforme vos visions en infrastructures durables.
-            Expertise reconnue en travaux publics et génie civil à travers tout
-            le Cameroun.
+          <p className="text-blue-200 text-lg mb-10 max-w-lg leading-relaxed">
+            <i>
+              ETS N MOISE transforme vos visions en infrastructures durables.
+              Expertise reconnue en travaux publics et génie civil à travers
+              tout le Cameroun.
+            </i>
           </p>
 
           <div className="flex flex-wrap gap-4">
