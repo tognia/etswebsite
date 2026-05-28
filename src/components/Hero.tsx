@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { HashLink } from "react-router-hash-link";
 
 // Tes imports d'images
 import diapo1 from "../public/brand/diapo1.png";
@@ -94,19 +95,19 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a
-              href="/devisPage"
+            <HashLink
+              to="/devisPage"
               className="px-8 py-4 bg-brand-orange text-brand-black font-bold uppercase tracking-widest hover:bg-white transition-all flex items-center gap-2 group"
             >
               Demander un devis
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a
-              href="#portfolio"
+            </HashLink>
+            <HashLink
+              to="#portfolio"
               className="px-8 py-4 border border-white/20 text-white font-bold uppercase tracking-widest hover:bg-white/10 transition-all"
             >
               Nos Projets
-            </a>
+            </HashLink>
           </div>
         </motion.div>
       </div>
