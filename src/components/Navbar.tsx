@@ -26,6 +26,7 @@ export default function Navbar() {
     { name: "Accueil", href: "/" },
     { name: "Expertise", href: "/#expertise" },
     { name: "Projets", href: "/projectsPage" },
+    { name: "À PROPOS", href: "/aboutPage" },
     { name: "Devis", href: "/devisPage" },
     { name: "Contact", href: "/#contact" },
   ];

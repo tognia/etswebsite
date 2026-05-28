@@ -94,6 +94,14 @@ export default function Footer() {
                   Contactez-nous
                 </HashLink>
               </li>
+              <li>
+                <HashLink
+                  to="/aboutPage"
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  À PROPOS
+                </HashLink>
+              </li>
             </ul>
           </div>
 

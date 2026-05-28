@@ -95,7 +95,7 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-4">
             <a
-              href="#devis"
+              href="/devisPage"
               className="px-8 py-4 bg-brand-orange text-brand-black font-bold uppercase tracking-widest hover:bg-white transition-all flex items-center gap-2 group"
             >
               Demander un devis

@@ -1,7 +1,3 @@
-import { Send, Upload, CheckCircle2, Loader2, FileText } from "lucide-react";
-import { db } from "../lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import emailjs from "@emailjs/browser";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { projects } from "../data/projects"; // Assurez-vous que ce fichier existe et exporte une liste de projets
