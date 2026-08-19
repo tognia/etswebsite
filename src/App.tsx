@@ -12,15 +12,18 @@ import DevisForm from "./components/DevisForm";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ErrorBoundary";
+import SEO from "./components/SEO";
 import ProjectDetail from "./app/project/[id]/page"; // Assurez-vous que ce fichier existe
 import DevisPage from "./app/devisPage";
 import ProjectsPage from "./app/projectsPage"; // Assurez-vous que ce fichier existe
 import AboutPage from "./app/AboutPage"; // Assurez-vous que ce fichier existe
+import ExpertisePage from "./app/ExpertisePage";
 
 export default function App() {
   return (
     <ErrorBoundary>
       <div className="min-h-screen font-sans selection:bg-brand-orange selection:text-brand-black">
+        <SEO />
         <Navbar />
 
         <main>
@@ -49,6 +52,8 @@ export default function App() {
             <Route path="/projectsPage" element={<ProjectsPage />} />
             {/* Route pour la page À PROPOS */}
             <Route path="/aboutPage" element={<AboutPage />} />
+            {/* Route pour les pages d'expertise */}
+            <Route path="/expertise/:slug" element={<ExpertisePage />} />
           </Routes>
         </main>
 

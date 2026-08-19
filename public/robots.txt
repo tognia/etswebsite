@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://etsnmoise.com/sitemap.xml

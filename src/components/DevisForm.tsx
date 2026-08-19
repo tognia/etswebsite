@@ -197,7 +197,7 @@ export default function DevisForm() {
                 >
                   <option>Génie Civil</option>
                   <option>Bâtiment</option>
-                  <option>Travaux Routiers</option>
+                  <option>Études & Conseil</option>
                   <option>Autre</option>
                 </select>
               </div>

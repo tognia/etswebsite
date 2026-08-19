@@ -72,7 +72,7 @@ export default function AboutPage() {
               l'entreprise
               <span className="text-brand-orange"> ETS N MOISE</span> s'impose
               comme un acteur de référence dans les secteurs du Génie Civil, du
-              Bâtiment et des Travaux Routiers au Cameroun.
+              Bâtiment et des Études techniques au Cameroun.
             </p>
             <p>
               Depuis notre siège social, nous pilotons des projets stratégiques
