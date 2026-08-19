@@ -225,7 +225,7 @@ export default function DevisPage() {
                     >
                       <option>Génie Civil</option>
                       <option>Bâtiment</option>
-                      <option>Travaux Routiers</option>
+                      <option>Études & Conseil</option>
                       <option>Autre</option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">

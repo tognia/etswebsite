@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "../public/brand/logo.png";
 import { projects } from "../data/projects";
+import { getExpertiseBySlug } from "../data/expertises";
 
 const SITE_NAME = "ETS N MOISE";
 const DEFAULT_DESCRIPTION =
@@ -80,6 +81,8 @@ export default function SEO() {
     const project = location.pathname.startsWith("/project/")
       ? projects.find((item) => String(item.id) === String(projectId))
       : null;
+    const expertiseSlug = location.pathname.match(/^\/expertise\/([^/]+)/)?.[1];
+    const expertise = expertiseSlug ? getExpertiseBySlug(expertiseSlug) : null;
 
     const pageMeta = project
       ? {
@@ -90,6 +93,13 @@ export default function SEO() {
           image: project.image,
           type: "article",
         }
+      : expertise
+        ? {
+            title: `${expertise.title} au Cameroun | ETS N MOISE`,
+            description: expertise.intro,
+            image: expertise.image,
+            type: "article",
+          }
       : {
           ...(routeMeta[location.pathname as keyof typeof routeMeta] || routeMeta["/"]),
           image: logo,
@@ -106,6 +116,7 @@ export default function SEO() {
       imageUrl,
       baseUrl,
       project,
+      expertise,
     };
   }, [location.pathname]);
 
@@ -199,7 +210,6 @@ export default function SEO() {
         "Genie civil",
         "Batiment",
         "Travaux publics",
-        "Travaux routiers",
         "Renovation de laboratoires",
       ],
     });
@@ -219,6 +229,12 @@ export default function SEO() {
         ? {
             about: metadata.project.category,
             contentLocation: metadata.project.location,
+          }
+        : {}),
+      ...(metadata.expertise
+        ? {
+            about: metadata.expertise.title,
+            serviceType: metadata.expertise.title,
           }
         : {}),
     });

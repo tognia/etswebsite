@@ -17,6 +17,7 @@ import ProjectDetail from "./app/project/[id]/page"; // Assurez-vous que ce fich
 import DevisPage from "./app/devisPage";
 import ProjectsPage from "./app/projectsPage"; // Assurez-vous que ce fichier existe
 import AboutPage from "./app/AboutPage"; // Assurez-vous que ce fichier existe
+import ExpertisePage from "./app/ExpertisePage";
 
 export default function App() {
   return (
@@ -51,6 +52,8 @@ export default function App() {
             <Route path="/projectsPage" element={<ProjectsPage />} />
             {/* Route pour la page À PROPOS */}
             <Route path="/aboutPage" element={<AboutPage />} />
+            {/* Route pour les pages d'expertise */}
+            <Route path="/expertise/:slug" element={<ExpertisePage />} />
           </Routes>
         </main>
 
