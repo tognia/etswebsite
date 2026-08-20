@@ -9,22 +9,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { HashLink } from "react-router-hash-link";
-
-// Tes imports d'images
-import diapo1 from "../public/brand/diapo1.png";
-import diapo2 from "../public/brand/diapo2.png";
-import diapo3 from "../public/brand/diapo3.png";
-import diapo4 from "../public/brand/diapo4.png";
-import diapo5 from "../public/brand/diapo5.png";
-
-const images = [
-  { id: 1, src: diapo1, alt: "Projet BTP 1" },
-  { id: 2, src: diapo2, alt: "Projet BTP 2" },
-  { id: 3, src: diapo3, alt: "Projet BTP 3" },
-  // Ajoute l'image Unsplash par défaut si tu veux la garder dans la boucle
-  { id: 4, src: diapo4, alt: "Projet BTP 4" },
-  { id: 5, src: diapo5, alt: "Projet BTP 5" },
-];
+import { expertises } from "../data/expertises";
 
 const metrics = [
   { value: "+25", label: "ans d'expérience" },
@@ -40,6 +25,7 @@ const assurances = [
 
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const currentSlide = expertises[currentIndex];
 
   // Auto-play : Change d'image toutes des 5 secondes
   useEffect(() => {
@@ -50,11 +36,11 @@ export default function Hero() {
   }, [currentIndex]);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === expertises.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? expertises.length - 1 : prev - 1));
   };
 
   return (
@@ -63,11 +49,11 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           <motion.img
-            key={images[currentIndex].id}
-            src={images[currentIndex].src}
-            alt={images[currentIndex].alt}
+            key={currentSlide.slug}
+            src={currentSlide.image}
+            alt={`Service ${currentSlide.title}`}
             initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 0.62, scale: 1 }}
+            animate={{ opacity: 0.82, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2 }}
             className="absolute inset-0 w-full h-full object-cover"
@@ -75,8 +61,8 @@ export default function Hero() {
         </AnimatePresence>
 
         {/* Overlay Dégradé */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-950 via-blue-950/78 to-blue-950/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-transparent to-blue-950/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/85 via-blue-950/50 to-blue-950/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-950/78 via-transparent to-blue-950/25" />
       </div>
 
       {/* Contenu Principal */}
@@ -91,28 +77,24 @@ export default function Hero() {
             <div className="flex items-center gap-3 mb-6">
               <div className="h-px w-12 bg-brand-orange" />
               <span className="text-brand-orange font-black tracking-[0.28em] uppercase text-xs sm:text-sm">
-                Génie civil & bâtiment au Cameroun
+                {currentSlide.shortTitle} au Cameroun
               </span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black text-white leading-[0.88] mb-8 uppercase italic">
-              Bâtir
-              <br />
-              <span className="text-brand-orange">avec assurance</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-white leading-[0.9] mb-8 uppercase italic">
+              {currentSlide.title}
             </h1>
 
             <p className="text-blue-100 text-lg md:text-xl mb-10 max-w-2xl leading-relaxed border-l-4 border-brand-orange pl-6">
-              ETS N MOISE transforme les projets complexes en infrastructures
-              durables, avec une exécution rigoureuse du diagnostic technique à
-              la livraison.
+              {currentSlide.intro}
             </p>
 
             <div className="flex flex-wrap gap-4">
               <HashLink
-                to="/devisPage"
+                to={`/expertise/${currentSlide.slug}`}
                 className="px-7 py-4 bg-brand-orange text-brand-black font-black uppercase tracking-widest hover:bg-white transition-all flex items-center gap-2 group"
               >
-                Demander un devis
+                Découvrir ce service
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </HashLink>
               <HashLink
@@ -161,16 +143,16 @@ export default function Hero() {
 
         <div className="mt-12 flex items-center justify-between gap-6">
           <div className="flex gap-2">
-            {images.map((image, index) => (
+            {expertises.map((item, index) => (
               <button
-                key={image.id}
+                key={item.slug}
                 onClick={() => setCurrentIndex(index)}
                 className={`h-1.5 transition-all ${
                   currentIndex === index
                     ? "w-10 bg-brand-orange"
                     : "w-5 bg-white/35 hover:bg-white/70"
                 }`}
-                aria-label={`Voir le visuel ${index + 1}`}
+                aria-label={`Voir le service ${item.title}`}
               />
             ))}
           </div>

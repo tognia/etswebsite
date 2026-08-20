@@ -1,9 +1,10 @@
-import { Building2, Construction, Ruler } from "lucide-react";
+import { Building2, Construction, Handshake, Ruler } from "lucide-react";
 import building from "../public/backgrounds/building.png";
 import nphlmainlab from "../public/brand/nphlmainlab.png";
 import cathedrale from "../public/brand/cathedrale.png";
 import maroua from "../public/brand/maroua.png";
 import tcholere from "../public/brand/tcholere.png";
+import assistanceFonciereChantier from "../public/brand/assistance-fonciere-chantier-generated.jpg";
 
 export const expertises = [
   {
@@ -104,6 +105,41 @@ export const expertises = [
     relatedProjects: [
       "Assistance technique BTP",
       "Préparation de dossiers de travaux",
+    ],
+  },
+  {
+    slug: "assistance-fonciere-suivi-chantier",
+    title: "Assistance Foncière & Suivi de Chantier",
+    shortTitle: "Assistance & Suivi",
+    description:
+      "Accompagnement terrain, construction et contrôle de chantier pour les clients locaux et la diaspora.",
+    intro:
+      "ETS N MOISE accompagne les particuliers, investisseurs et membres de la diaspora dans l'acquisition sécurisée de terrains, la préparation des documents utiles, la construction et le suivi à distance des travaux grâce à des rapports réguliers, datés et vérifiables.",
+    icon: Handshake,
+    image: assistanceFonciereChantier,
+    heroImage: assistanceFonciereChantier,
+    highlights: [
+      "Assistance à l'acquisition de terrain et vérification des documents afférents",
+      "Construction neuve, rénovation et coordination des intervenants sur site",
+      "Suivi de chantier à distance avec rapports photo, vidéo et avancement authentifié",
+      "Contrôle des travaux, conformité des matériaux et vérification des étapes clés",
+    ],
+    process: [
+      "Analyse du besoin, du budget, de la localisation et des pièces disponibles",
+      "Vérifications préalables du terrain, cadrage technique et administratif",
+      "Mise en place du planning, des contrôles et du format de reporting",
+      "Transmission régulière des rapports et arbitrages jusqu'à la réception",
+    ],
+    deliverables: [
+      "Rapport de visite terrain",
+      "Checklist documentaire",
+      "Rapports d'avancement illustrés",
+      "PV de contrôle et réserves",
+    ],
+    relatedProjects: [
+      "Accompagnement diaspora",
+      "Suivi de maisons familiales",
+      "Contrôle qualité de chantier",
     ],
   },
 ];

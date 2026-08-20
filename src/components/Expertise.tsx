@@ -44,7 +44,7 @@ export default function Expertise() {
         </div>
 
         {/* Grid avec effet de verre (Glassmorphism) léger */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {expertises.map((item, index) => (
             <motion.div
               key={item.title}
