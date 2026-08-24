@@ -3,11 +3,14 @@ import { Menu, X, Instagram } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "../public/brand/logo.png";
 import { HashLink } from "react-router-hash-link";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { alternateLocalePath, useLanguage, withLocale } from "../lib/i18n";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const locale = useLanguage();
+  const location = useLocation();
 
   // Handle scroll effect
   useEffect(() => {
@@ -23,11 +26,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Accueil", href: "/" },
+    { name: locale === "en" ? "Home" : "Accueil", href: "/" },
     { name: "Expertise", href: "/#expertise" },
-    { name: "Projets", href: "/projectsPage" },
-    { name: "À PROPOS", href: "/aboutPage" },
-    { name: "Devis", href: "/devisPage" },
+    { name: locale === "en" ? "Projects" : "Projets", href: "/projectsPage" },
+    { name: locale === "en" ? "About" : "À PROPOS", href: "/aboutPage" },
+    { name: locale === "en" ? "Quote" : "Devis", href: "/devisPage" },
     { name: "Contact", href: "/#contact" },
   ];
 
@@ -42,7 +45,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo Section */}
-          <a key="Accueil" href="/" className="flex items-center gap-2 group">
+          <a key="Accueil" href={withLocale("/", locale)} className="flex items-center gap-2 group">
             <img
               src={logo}
               alt="Logo ETS N MOISE"
@@ -61,7 +64,7 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <HashLink
                   key={link.name}
-                  to={link.href}
+                  to={withLocale(link.href, locale)}
                   className={`text-sm font-bold transition-colors uppercase tracking-widest hover:text-brand-orange ${
                     scrolled ? "text-blue-950" : "text-white drop-shadow-md"
                   }`}
@@ -85,6 +88,17 @@ export default function Navbar() {
             >
               <Instagram className="w-5 h-5" />
             </a>
+            <HashLink
+              to={alternateLocalePath(location.pathname, location.hash)}
+              className={`text-xs font-black uppercase tracking-widest px-3 py-2 border transition-all ${
+                scrolled
+                  ? "border-blue-950/20 text-blue-950 hover:border-brand-orange hover:text-brand-orange"
+                  : "border-white/30 text-white hover:bg-white hover:text-blue-950"
+              }`}
+              aria-label={locale === "en" ? "Voir la version française" : "View English version"}
+            >
+              {locale === "en" ? "FR" : "EN"}
+            </HashLink>
           </div>
 
           {/* Mobile Menu Button */}
@@ -108,6 +122,15 @@ export default function Navbar() {
                 <Menu className="w-7 h-7" />
               )}
             </button>
+            <HashLink
+              to={alternateLocalePath(location.pathname, location.hash)}
+              className={`text-xs font-black uppercase tracking-widest px-2 py-1 border ${
+                scrolled ? "border-blue-950/20 text-blue-950" : "border-white/30 text-white"
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              {locale === "en" ? "FR" : "EN"}
+            </HashLink>
           </div>
         </div>
       </div>
@@ -125,7 +148,7 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <a
                   key={link.name}
-                  href={link.href}
+                  href={withLocale(link.href, locale)}
                   className="block px-3 py-3 text-lg font-bold text-blue-950 hover:bg-blue-50 rounded-lg transition-colors uppercase tracking-widest"
                   onClick={() => setIsOpen(false)}
                 >

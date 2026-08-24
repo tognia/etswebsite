@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "../public/brand/logo.png";
-import { projects } from "../data/projects";
-import { expertises, getExpertiseBySlug } from "../data/expertises";
+import { getProjectById } from "../data/projects";
+import { getExpertises, getExpertiseBySlug } from "../data/expertises";
+import { isEnglishPath, stripLocalePrefix } from "../lib/i18n";
 
 const SITE_NAME = "ETS N MOISE";
 const SITE_URL = "https://etsnmoise.com";
@@ -10,6 +11,11 @@ const DEFAULT_DESCRIPTION =
   "ETS N MOISE est une entreprise de BTP au Cameroun specialisee en genie civil, batiment, assistance fonciere, suivi de chantier et infrastructures durables.";
 const DEFAULT_KEYWORDS =
   "ETS N MOISE, BTP Cameroun, entreprise BTP Cameroun, genie civil Cameroun, construction Cameroun, batiment Yaounde, travaux publics, assistance fonciere Cameroun, acquisition terrain Cameroun, suivi chantier diaspora, controle travaux, renovation laboratoire, devis construction";
+
+const DEFAULT_DESCRIPTION_EN =
+  "ETS N MOISE is a construction company in Cameroon specializing in civil engineering, building construction, land assistance, site monitoring, and durable infrastructure.";
+const DEFAULT_KEYWORDS_EN =
+  "ETS N MOISE, construction company Cameroon, civil engineering Cameroon, building construction Cameroon, construction Yaounde, public works, land assistance Cameroon, site monitoring diaspora, laboratory renovation, construction quote";
 
 const routeMeta = {
   "/": {
@@ -40,6 +46,39 @@ const routeMeta = {
       "Demandez une estimation pour vos travaux de batiment, genie civil, assistance fonciere, suivi de chantier, renovation ou infrastructure au Cameroun.",
     keywords:
       "devis BTP Cameroun, devis construction Yaounde, devis renovation Cameroun, demande devis chantier, ETS N MOISE",
+    schemaType: "ContactPage",
+  },
+};
+
+const routeMetaEn = {
+  "/": {
+    title: "ETS N MOISE | Construction Company in Cameroon",
+    description: DEFAULT_DESCRIPTION_EN,
+    keywords: DEFAULT_KEYWORDS_EN,
+    schemaType: "WebPage",
+  },
+  "/projectsPage": {
+    title: "Construction Projects in Cameroon | ETS N MOISE",
+    description:
+      "Explore projects delivered by ETS N MOISE in Cameroon: laboratories, public buildings, technical renovations, and civil engineering infrastructure.",
+    keywords:
+      "construction projects Cameroon, building projects Cameroon, laboratory renovation, public buildings Cameroon, ETS N MOISE",
+    schemaType: "CollectionPage",
+  },
+  "/aboutPage": {
+    title: "About ETS N MOISE Construction Company",
+    description:
+      "Presentation of ETS N MOISE, a Cameroonian civil engineering, building construction, technical assistance, and public works company led by NGNOKAM MOISE.",
+    keywords:
+      "ETS N MOISE, construction company Yaounde, construction company Cameroon, NGNOKAM MOISE, civil engineering Cameroon",
+    schemaType: "AboutPage",
+  },
+  "/devisPage": {
+    title: "Request a Construction Quote in Cameroon | ETS N MOISE",
+    description:
+      "Request an estimate for building construction, civil engineering, land assistance, site monitoring, renovation, or infrastructure works in Cameroon.",
+    keywords:
+      "construction quote Cameroon, building quote Yaounde, renovation quote Cameroon, site estimate, ETS N MOISE",
     schemaType: "ContactPage",
   },
 };
@@ -102,7 +141,7 @@ function absoluteUrl(pathOrAsset: string, baseUrl: string) {
   return new URL(pathOrAsset, baseUrl).toString();
 }
 
-function getPathSegments(pathname: string) {
+function getPathSegments(pathname: string, pathPrefix = "") {
   const segments = pathname.split("/").filter(Boolean);
   return segments.map((segment, index) => ({
     "@type": "ListItem",
@@ -110,7 +149,7 @@ function getPathSegments(pathname: string) {
     name: decodeURIComponent(segment)
       .replace(/-/g, " ")
       .replace(/\b\w/g, (letter) => letter.toUpperCase()),
-    item: `${SITE_URL}/${segments.slice(0, index + 1).join("/")}`,
+    item: `${SITE_URL}${pathPrefix}/${segments.slice(0, index + 1).join("/")}`,
   }));
 }
 
@@ -119,27 +158,43 @@ export default function SEO() {
 
   const metadata = useMemo(() => {
     const baseUrl = getBaseUrl();
-    const projectId = location.pathname.match(/^\/project\/([^/]+)/)?.[1];
-    const project = location.pathname.startsWith("/project/")
-      ? projects.find((item) => String(item.id) === String(projectId))
+    const locale = isEnglishPath(location.pathname) ? "en" : "fr";
+    const normalizedPath = stripLocalePrefix(location.pathname);
+    const projectId = normalizedPath.match(/^\/project\/([^/]+)/)?.[1];
+    const project = normalizedPath.startsWith("/project/")
+      ? getProjectById(projectId, locale)
       : null;
-    const expertiseSlug = location.pathname.match(/^\/expertise\/([^/]+)/)?.[1];
-    const expertise = expertiseSlug ? getExpertiseBySlug(expertiseSlug) : null;
+    const expertiseSlug = normalizedPath.match(/^\/expertise\/([^/]+)/)?.[1];
+    const expertise = expertiseSlug ? getExpertiseBySlug(expertiseSlug, locale) : null;
+    const localizedRouteMeta = locale === "en" ? routeMetaEn : routeMeta;
+    const defaultDescription = locale === "en" ? DEFAULT_DESCRIPTION_EN : DEFAULT_DESCRIPTION;
+    const allExpertises = getExpertises(locale);
 
     const pageMeta = project
       ? {
-          title: `${project.title} | Realisation BTP ETS N MOISE`,
+          title:
+            locale === "en"
+              ? `${project.title} | ETS N MOISE Construction Project`
+              : `${project.title} | Realisation BTP ETS N MOISE`,
           description:
             project.description ||
-            `Projet ${project.category} livre par ETS N MOISE a ${project.location}.`,
+            (locale === "en"
+              ? `${project.category} project delivered by ETS N MOISE in ${project.location}.`
+              : `Projet ${project.category} livre par ETS N MOISE a ${project.location}.`),
           image: project.image,
-          keywords: `${project.title}, ${project.category}, ${project.location}, realisation BTP Cameroun, ETS N MOISE`,
+          keywords:
+            locale === "en"
+              ? `${project.title}, ${project.category}, ${project.location}, construction project Cameroon, ETS N MOISE`
+              : `${project.title}, ${project.category}, ${project.location}, realisation BTP Cameroun, ETS N MOISE`,
           ogType: "article",
           schemaType: "CreativeWork",
         }
       : expertise
         ? {
-            title: `${expertise.title} au Cameroun | ETS N MOISE`,
+            title:
+              locale === "en"
+                ? `${expertise.title} in Cameroon | ETS N MOISE`
+                : `${expertise.title} au Cameroun | ETS N MOISE`,
             description: expertise.intro,
             image: expertise.image,
             keywords:
@@ -149,13 +204,19 @@ export default function SEO() {
             schemaType: "Service",
           }
       : {
-          ...(routeMeta[location.pathname as keyof typeof routeMeta] || routeMeta["/"]),
+          ...(localizedRouteMeta[normalizedPath as keyof typeof routeMeta] || localizedRouteMeta["/"]),
           image: logo,
           ogType: "website",
         };
 
     const canonicalPath = location.pathname === "/" ? "/" : location.pathname;
     const canonicalUrl = `${baseUrl}${canonicalPath}`;
+    const alternatePath =
+      locale === "en"
+        ? normalizedPath
+        : normalizedPath === "/"
+          ? "/en"
+          : `/en${normalizedPath}`;
     const imageUrl = absoluteUrl(pageMeta.image, baseUrl);
 
     return {
@@ -166,11 +227,16 @@ export default function SEO() {
       project,
       expertise,
       canonicalPath,
+      normalizedPath,
+      locale,
+      alternateUrl: `${baseUrl}${alternatePath}`,
+      defaultDescription,
+      allExpertises,
     };
   }, [location.pathname]);
 
   useEffect(() => {
-    document.documentElement.lang = "fr-CM";
+    document.documentElement.lang = metadata.locale === "en" ? "en-CM" : "fr-CM";
     document.title = metadata.title;
 
     upsertMeta('meta[name="description"]', {
@@ -220,7 +286,7 @@ export default function SEO() {
     });
     upsertMeta('meta[property="og:locale"]', {
       property: "og:locale",
-      content: "fr_CM",
+      content: metadata.locale === "en" ? "en_CM" : "fr_CM",
     });
 
     upsertMeta('meta[name="twitter:card"]', {
@@ -249,7 +315,19 @@ export default function SEO() {
     document
       .head
       .querySelector<HTMLLinkElement>('link[rel="alternate"]')
-      ?.setAttribute("hreflang", "fr-CM");
+      ?.setAttribute("hreflang", metadata.locale === "en" ? "en-CM" : "fr-CM");
+
+    let alternateLanguage = document.head.querySelector<HTMLLinkElement>(
+      'link[data-locale-alternate="true"]',
+    );
+    if (!alternateLanguage) {
+      alternateLanguage = document.createElement("link");
+      alternateLanguage.rel = "alternate";
+      alternateLanguage.dataset.localeAlternate = "true";
+      document.head.appendChild(alternateLanguage);
+    }
+    alternateLanguage.href = metadata.alternateUrl;
+    alternateLanguage.hreflang = metadata.locale === "en" ? "fr-CM" : "en-CM";
 
     upsertJsonLd("seo-organization", {
       "@context": "https://schema.org",
@@ -259,7 +337,7 @@ export default function SEO() {
       url: metadata.baseUrl,
       image: metadata.imageUrl,
       logo: absoluteUrl(logo, metadata.baseUrl),
-      description: DEFAULT_DESCRIPTION,
+      description: metadata.defaultDescription,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Yaounde",
@@ -275,17 +353,28 @@ export default function SEO() {
       email: "ngnokamoise@yahoo.fr",
       sameAs: ["https://www.instagram.com/etsnmoise"],
       knowsAbout: [
-        "Genie civil",
-        "Batiment",
-        "Travaux publics",
-        "Renovation de laboratoires",
-        "Assistance fonciere",
-        "Suivi de chantier a distance",
+        ...(metadata.locale === "en"
+          ? [
+              "Civil engineering",
+              "Building construction",
+              "Public works",
+              "Laboratory renovation",
+              "Land assistance",
+              "Remote site monitoring",
+            ]
+          : [
+              "Genie civil",
+              "Batiment",
+              "Travaux publics",
+              "Renovation de laboratoires",
+              "Assistance fonciere",
+              "Suivi de chantier a distance",
+            ]),
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Services BTP ETS N MOISE",
-        itemListElement: expertises.map((item) => ({
+        name: metadata.locale === "en" ? "ETS N MOISE Construction Services" : "Services BTP ETS N MOISE",
+        itemListElement: metadata.allExpertises.map((item) => ({
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
@@ -295,7 +384,7 @@ export default function SEO() {
               "@id": `${metadata.baseUrl}/#organization`,
             },
             areaServed: "Cameroon",
-            url: `${metadata.baseUrl}/expertise/${item.slug}`,
+            url: `${metadata.baseUrl}${metadata.locale === "en" ? "/en" : ""}/expertise/${item.slug}`,
           },
         })),
       },
@@ -343,10 +432,13 @@ export default function SEO() {
         {
           "@type": "ListItem",
           position: 1,
-          name: "Accueil",
+          name: metadata.locale === "en" ? "Home" : "Accueil",
           item: metadata.baseUrl,
         },
-        ...getPathSegments(metadata.canonicalPath),
+        ...getPathSegments(
+          metadata.normalizedPath,
+          metadata.locale === "en" ? "/en" : "",
+        ),
       ],
     });
   }, [metadata]);

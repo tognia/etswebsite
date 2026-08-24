@@ -1,17 +1,19 @@
 import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight, CheckCircle2, FileText } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { expertises, getExpertiseBySlug } from "../data/expertises";
+import { getExpertiseBySlug, getExpertises } from "../data/expertises";
+import { useLanguage, withLocale } from "../lib/i18n";
 
 export default function ExpertisePage() {
   const { slug } = useParams();
-  const expertise = getExpertiseBySlug(slug);
+  const locale = useLanguage();
+  const expertise = getExpertiseBySlug(slug, locale);
 
   if (!expertise) {
-    return <Navigate to="/#expertise" replace />;
+    return <Navigate to={withLocale("/#expertise", locale)} replace />;
   }
 
-  const otherExpertises = expertises.filter((item) => item.slug !== expertise.slug);
+  const otherExpertises = getExpertises(locale).filter((item) => item.slug !== expertise.slug);
 
   return (
     <main className="min-h-screen bg-brand-white text-blue-950">
@@ -25,11 +27,11 @@ export default function ExpertisePage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <Link
-            to="/#expertise"
+            to={withLocale("/#expertise", locale)}
             className="inline-flex items-center gap-2 text-white/80 hover:text-brand-orange transition-colors text-sm font-bold uppercase tracking-widest mb-10"
           >
             <ArrowLeft className="w-4 h-4" />
-            Toutes les expertises
+            {locale === "en" ? "All expertise areas" : "Toutes les expertises"}
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
@@ -43,7 +45,7 @@ export default function ExpertisePage() {
                   <expertise.icon className="w-8 h-8" />
                 </div>
                 <span className="text-brand-orange font-black tracking-[0.35em] uppercase text-xs">
-                  Expertise BTP
+                  {locale === "en" ? "Construction Expertise" : "Expertise BTP"}
                 </span>
               </div>
               <h1 className="text-5xl md:text-7xl font-black uppercase italic leading-none text-white mb-8">
@@ -62,12 +64,16 @@ export default function ExpertisePage() {
             >
               <img
                 src={expertise.image}
-                alt={`Projet illustrant l'expertise ${expertise.title}`}
+                alt={
+                  locale === "en"
+                    ? `Project illustrating ${expertise.title} expertise`
+                    : `Projet illustrant l'expertise ${expertise.title}`
+                }
                 className="w-full aspect-[4/3] object-cover"
               />
               <div className="p-6">
                 <p className="text-sm font-bold uppercase tracking-widest text-brand-orange mb-2">
-                  Champ d'intervention
+                  {locale === "en" ? "Scope of intervention" : "Champ d'intervention"}
                 </p>
                 <p className="text-blue-950 font-semibold leading-relaxed">
                   {expertise.description}
@@ -85,7 +91,7 @@ export default function ExpertisePage() {
               <div className="flex items-center gap-2 mb-8">
                 <div className="h-px w-10 bg-brand-orange" />
                 <h2 className="text-3xl md:text-4xl font-black uppercase italic">
-                  Prestations clés
+                  {locale === "en" ? "Key services" : "Prestations clés"}
                 </h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -107,7 +113,7 @@ export default function ExpertisePage() {
               <div className="flex items-center gap-3 mb-8">
                 <FileText className="w-7 h-7 text-brand-orange" />
                 <h2 className="text-2xl font-black uppercase italic">
-                  Livrables
+                  {locale === "en" ? "Deliverables" : "Livrables"}
                 </h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10">
@@ -118,10 +124,10 @@ export default function ExpertisePage() {
                 ))}
               </div>
               <Link
-                to="/devisPage"
+                to={withLocale("/devisPage", locale)}
                 className="mt-8 inline-flex items-center justify-center gap-2 w-full bg-brand-orange text-brand-black px-6 py-4 font-black uppercase tracking-widest hover:bg-white transition-colors"
               >
-                Demander un devis
+                {locale === "en" ? "Request a quote" : "Demander un devis"}
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </aside>
@@ -134,10 +140,10 @@ export default function ExpertisePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-4">
               <span className="text-brand-orange font-black tracking-[0.3em] uppercase text-xs">
-                Méthode
+                {locale === "en" ? "Method" : "Méthode"}
               </span>
               <h2 className="text-4xl md:text-5xl font-black uppercase italic leading-none mt-4">
-                Une exécution structurée
+                {locale === "en" ? "A structured execution process" : "Une exécution structurée"}
               </h2>
             </div>
             <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -161,17 +167,17 @@ export default function ExpertisePage() {
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10">
             <div>
               <span className="text-brand-orange font-black tracking-[0.3em] uppercase text-xs">
-                Références
+                {locale === "en" ? "References" : "Références"}
               </span>
               <h2 className="text-4xl md:text-5xl font-black uppercase italic mt-4">
-                Applications concrètes
+                {locale === "en" ? "Concrete applications" : "Applications concrètes"}
               </h2>
             </div>
             <Link
-              to="/projectsPage"
+              to={withLocale("/projectsPage", locale)}
               className="inline-flex items-center gap-2 text-blue-950 font-black uppercase tracking-widest hover:text-brand-orange transition-colors"
             >
-              Voir les réalisations
+              {locale === "en" ? "View projects" : "Voir les réalisations"}
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
@@ -190,12 +196,12 @@ export default function ExpertisePage() {
             {otherExpertises.map((item) => (
               <Link
                 key={item.slug}
-                to={`/expertise/${item.slug}`}
+                to={withLocale(`/expertise/${item.slug}`, locale)}
                 className="group bg-blue-950 text-white p-6 hover:bg-brand-orange hover:text-brand-black transition-colors"
               >
                 <item.icon className="w-8 h-8 mb-5 text-brand-orange group-hover:text-brand-black transition-colors" />
                 <p className="text-sm font-bold uppercase tracking-widest opacity-70 mb-2">
-                  Autre expertise
+                  {locale === "en" ? "Other expertise" : "Autre expertise"}
                 </p>
                 <h3 className="text-xl font-black uppercase">{item.shortTitle}</h3>
               </Link>

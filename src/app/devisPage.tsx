@@ -4,8 +4,85 @@ import { useState, FormEvent } from "react";
 import { db } from "../lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import emailjs from "@emailjs/browser";
+import { useLanguage } from "../lib/i18n";
 
 export default function DevisPage() {
+  const locale = useLanguage();
+  const t = {
+    fr: {
+      defaultType: "Génie Civil",
+      noFile: "Aucun fichier joint",
+      eyebrow: "ESTIMATION & ÉTUDE TECHNIQUE",
+      title: "Demander un",
+      titleAccent: "Devis Professionnel",
+      intro:
+        "Prêt à lancer votre projet d'envergure ? Remplissez notre formulaire d'étude. Vous pouvez joindre vos cahiers des charges ou plans techniques (Minitp, ARMP, plans d'architecte) pour un chiffrage rigoureux sous 48h.",
+      steps: [
+        ["Analyse de Faisabilité", "Notre bureau d'études étudie vos contraintes techniques et structurelles."],
+        ["Chiffrage Quantitatif & Estimatif", "Établissement d'un devis transparent basé sur les prix réels du marché (FCFA)."],
+        ["Planification Initiale", "Proposition d'un calendrier d'exécution prévisionnel pour vos travaux."],
+      ],
+      successTitle: "Demande Transmise",
+      successText:
+        "Votre dossier a été enregistré avec succès dans notre base de données. Un e-mail de confirmation a été envoyé à la direction technique d'ETS N MOISE.",
+      newQuote: "Nouveau Devis",
+      fullName: "Nom Complet / Entreprise",
+      namePlaceholder: "Ex: Haisam Construction ou M. Ndong",
+      phone: "Tel.",
+      phonePlaceholder: "07 00 00 00",
+      email: "Adresse Email",
+      emailPlaceholder: "contact@entreprise.com",
+      workType: "Secteur d'Activité / Type de Travaux",
+      options: ["Génie Civil", "Bâtiment", "Études & Conseil", "Autre"],
+      budget: "Budget Estimé (FCFA)",
+      budgetPlaceholder: "Ex: 45 000 000 FCFA",
+      needs: "Description des Besoins",
+      needsPlaceholder:
+        "Précisez la localisation du site, la surface, le type de structure souhaité...",
+      attachments: "Pièces Jointes & Plans (PDF, JPG, PNG)",
+      selectFile: "Sélectionner un fichier ou plan",
+      error:
+        "Une erreur réseau est survenue. Veuillez vérifier votre connexion et réessayer.",
+      submit: "Soumettre mon Dossier",
+    },
+    en: {
+      defaultType: "Civil Engineering",
+      noFile: "No file attached",
+      eyebrow: "ESTIMATE & TECHNICAL STUDY",
+      title: "Request a",
+      titleAccent: "Professional Quote",
+      intro:
+        "Ready to launch a major project? Complete our study form. You may attach specifications or technical plans for a rigorous estimate within 48 hours.",
+      steps: [
+        ["Feasibility Analysis", "Our design office reviews your technical and structural constraints."],
+        ["Quantity & Cost Estimate", "Preparation of a transparent quote based on real market prices (FCFA)."],
+        ["Initial Planning", "Proposal of a preliminary execution schedule for your works."],
+      ],
+      successTitle: "Request Submitted",
+      successText:
+        "Your file has been successfully recorded. A confirmation email has been sent to the ETS N MOISE technical management team.",
+      newQuote: "New Quote",
+      fullName: "Full Name / Company",
+      namePlaceholder: "Ex: Haisam Construction or Mr. Ndong",
+      phone: "Phone",
+      phonePlaceholder: "+237 6 00 00 00 00",
+      email: "Email Address",
+      emailPlaceholder: "contact@company.com",
+      workType: "Business Sector / Type of Work",
+      options: ["Civil Engineering", "Building", "Studies & Consulting", "Other"],
+      budget: "Estimated Budget (FCFA)",
+      budgetPlaceholder: "Ex: 45,000,000 FCFA",
+      needs: "Needs Description",
+      needsPlaceholder:
+        "Specify the site location, surface area, and desired structure type...",
+      attachments: "Attachments & Plans (PDF, JPG, PNG)",
+      selectFile: "Select a file or plan",
+      error:
+        "A network error occurred. Please check your connection and try again.",
+      submit: "Submit my File",
+    },
+  }[locale];
+
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -14,7 +91,7 @@ export default function DevisPage() {
     name: "",
     telephone: "",
     email: "",
-    type: "Génie Civil",
+    type: t.defaultType,
     budget: "",
     message: "",
   });
@@ -40,7 +117,7 @@ export default function DevisPage() {
         work_type: formData.type,
         budget: formData.budget,
         message: formData.message,
-        file_name: file ? file.name : "Aucun fichier joint",
+        file_name: file ? file.name : t.noFile,
         to_name: "Direction ETS N MOISE",
       };
 
@@ -57,7 +134,7 @@ export default function DevisPage() {
         name: "",
         telephone: "",
         email: "",
-        type: "Génie Civil",
+        type: t.defaultType,
         budget: "",
         message: "",
       });
@@ -75,17 +152,14 @@ export default function DevisPage() {
           {/* Section Gauche : Textes et Informations */}
           <div>
             <span className="text-xs font-black uppercase tracking-[0.3em] text-brand-orange block mb-3">
-              ESTIMATION & ÉTUDE TECHNIQUE
+              {t.eyebrow}
             </span>
             <h1 className="text-5xl md:text-6xl font-black text-blue-950 uppercase italic leading-none mb-8">
-              Demander un <br />
-              <span className="text-brand-orange">Devis Professionnel</span>
+              {t.title} <br />
+              <span className="text-brand-orange">{t.titleAccent}</span>
             </h1>
             <p className="text-gray-600 text-lg mb-12 leading-relaxed max-w-xl">
-              Prêt à lancer votre projet d'envergure ? Remplissez notre
-              formulaire d'étude. Vous pouvez joindre vos cahiers des charges ou
-              plans techniques (Minitp, ARMP, plans d'architecte) pour un
-              chiffrage rigoureux sous 48h.
+              {t.intro}
             </p>
 
             {/* Étapes de traitement */}
@@ -96,11 +170,10 @@ export default function DevisPage() {
                 </div>
                 <div>
                   <h4 className="font-bold text-blue-950 uppercase mb-1">
-                    Analyse de Faisabilité
+                    {t.steps[0][0]}
                   </h4>
                   <p className="text-gray-500 text-sm">
-                    Notre bureau d'études étudie vos contraintes techniques et
-                    structurelles.
+                    {t.steps[0][1]}
                   </p>
                 </div>
               </div>
@@ -111,11 +184,10 @@ export default function DevisPage() {
                 </div>
                 <div>
                   <h4 className="font-bold text-blue-950 uppercase mb-1">
-                    Chiffrage Quantitatif & Estimatif
+                    {t.steps[1][0]}
                   </h4>
                   <p className="text-gray-500 text-sm">
-                    Établissement d'un devis transparent basé sur les prix réels
-                    du marché (FCFA).
+                    {t.steps[1][1]}
                   </p>
                 </div>
               </div>
@@ -126,11 +198,10 @@ export default function DevisPage() {
                 </div>
                 <div>
                   <h4 className="font-bold text-blue-950 uppercase mb-1">
-                    Planification Initiale
+                    {t.steps[2][0]}
                   </h4>
                   <p className="text-gray-500 text-sm">
-                    Proposition d'un calendrier d'exécution prévisionnel pour
-                    vos travaux.
+                    {t.steps[2][1]}
                   </p>
                 </div>
               </div>
@@ -147,18 +218,16 @@ export default function DevisPage() {
               >
                 <CheckCircle2 className="w-20 h-20 text-brand-orange mx-auto mb-6" />
                 <h3 className="text-3xl font-black uppercase italic text-blue-950 mb-4">
-                  Demande Transmise
+                  {t.successTitle}
                 </h3>
                 <p className="text-gray-600 mb-8 max-w-sm mx-auto">
-                  Votre dossier a été enregistré avec succès dans notre base de
-                  données. Un e-mail de confirmation a été envoyé à la direction
-                  technique d'ETS N MOISE.
+                  {t.successText}
                 </p>
                 <button
                   onClick={() => setStatus("idle")}
                   className="px-8 py-3 bg-black text-white font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-black transition-all"
                 >
-                  Nouveau Devis
+                  {t.newQuote}
                 </button>
               </motion.div>
             ) : (
@@ -166,7 +235,7 @@ export default function DevisPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                      Nom Complet / Entreprise
+                      {t.fullName}
                     </label>
                     <input
                       required
@@ -176,12 +245,12 @@ export default function DevisPage() {
                         setFormData({ ...formData, name: e.target.value })
                       }
                       className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors font-medium text-blue-950"
-                      placeholder="Ex: Haisam Construction ou M. Ndong"
+                      placeholder={t.namePlaceholder}
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                      Tel.
+                      {t.phone}
                     </label>
                     <input
                       required
@@ -191,12 +260,12 @@ export default function DevisPage() {
                         setFormData({ ...formData, telephone: e.target.value })
                       }
                       className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors font-medium text-blue-950"
-                      placeholder="07 00 00 00"
+                      placeholder={t.phonePlaceholder}
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                      Adresse Email
+                      {t.email}
                     </label>
                     <input
                       required
@@ -206,14 +275,14 @@ export default function DevisPage() {
                         setFormData({ ...formData, email: e.target.value })
                       }
                       className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors font-medium text-blue-950"
-                      placeholder="contact@entreprise.com"
+                      placeholder={t.emailPlaceholder}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                    Secteur d'Activité / Type de Travaux
+                    {t.workType}
                   </label>
                   <div className="relative">
                     <select
@@ -223,10 +292,9 @@ export default function DevisPage() {
                       }
                       className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors font-medium text-blue-950 appearance-none cursor-pointer"
                     >
-                      <option>Génie Civil</option>
-                      <option>Bâtiment</option>
-                      <option>Études & Conseil</option>
-                      <option>Autre</option>
+                      {t.options.map((option) => (
+                        <option key={option}>{option}</option>
+                      ))}
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
                       ▼
@@ -236,7 +304,7 @@ export default function DevisPage() {
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                    Budget Estimé (FCFA)
+                    {t.budget}
                   </label>
                   <input
                     type="text"
@@ -245,13 +313,13 @@ export default function DevisPage() {
                       setFormData({ ...formData, budget: e.target.value })
                     }
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors font-medium text-blue-950"
-                    placeholder="Ex: 45 000 000 FCFA"
+                    placeholder={t.budgetPlaceholder}
                   />
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                    Description des Besoins
+                    {t.needs}
                   </label>
                   <textarea
                     rows={4}
@@ -260,13 +328,13 @@ export default function DevisPage() {
                       setFormData({ ...formData, message: e.target.value })
                     }
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors resize-none font-medium text-blue-950"
-                    placeholder="Précisez la localisation du site, la surface, le type de structure souhaité..."
+                    placeholder={t.needsPlaceholder}
                   />
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                    Pièces Jointes & Plans (PDF, JPG, PNG)
+                    {t.attachments}
                   </label>
                   <div className="relative">
                     <input
@@ -286,7 +354,7 @@ export default function DevisPage() {
                         <Upload className="w-6 h-6 text-gray-400 group-hover:text-brand-orange" />
                       )}
                       <span className="text-sm text-gray-500 group-hover:text-black font-semibold truncate max-w-xs">
-                        {file ? file.name : "Sélectionner un fichier ou plan"}
+                        {file ? file.name : t.selectFile}
                       </span>
                     </label>
                   </div>
@@ -294,8 +362,7 @@ export default function DevisPage() {
 
                 {status === "error" && (
                   <p className="text-red-600 text-sm font-bold bg-red-50 p-3 border-l-4 border-red-600">
-                    Une erreur réseau est survenue. Veuillez vérifier votre
-                    connexion et réessayer.
+                    {t.error}
                   </p>
                 )}
 
@@ -308,7 +375,7 @@ export default function DevisPage() {
                     <Loader2 className="w-5 h-5 animate-spin" />
                   ) : (
                     <>
-                      Soumettre mon Dossier
+                      {t.submit}
                       <Send className="w-5 h-5" />
                     </>
                   )}
