@@ -4,8 +4,56 @@ import { useState, FormEvent } from "react";
 import { db } from "../lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import emailjs from "@emailjs/browser";
+import { useLanguage } from "../lib/i18n";
 
 export default function ContactForm() {
+  const locale = useLanguage();
+  const t = {
+    fr: {
+      successTitle: "Message Envoyé",
+      successText:
+        "Merci de nous avoir contactés. Notre équipe vous répondra dans les plus brefs délais.",
+      newRequest: "Nouvelle demande",
+      headingStart: "Contactez",
+      headingEnd: "Nous",
+      intro:
+        "Une question ? Un projet ? Notre équipe est à votre écoute pour vous accompagner dans vos réalisations.",
+      location: "Localisation",
+      phone: "Téléphone",
+      fullName: "Nom Complet",
+      phonePlaceholder: "Numéro de téléphone",
+      subject: "Sujet",
+      subjectPlaceholder: "Objet de votre message",
+      message: "Message / Détails",
+      messagePlaceholder: "Décrivez votre projet...",
+      error: "Une erreur est survenue. Veuillez réessayer.",
+      submit: "Envoyer le message",
+      namePlaceholder: "Jean Dupont",
+      emailPlaceholder: "jean@exemple.com",
+    },
+    en: {
+      successTitle: "Message Sent",
+      successText:
+        "Thank you for contacting us. Our team will reply as soon as possible.",
+      newRequest: "New request",
+      headingStart: "Contact",
+      headingEnd: "Us",
+      intro:
+        "Have a question or a project? Our team is ready to support your construction goals.",
+      location: "Location",
+      phone: "Phone",
+      fullName: "Full Name",
+      phonePlaceholder: "Phone number",
+      subject: "Subject",
+      subjectPlaceholder: "Subject of your message",
+      message: "Message / Details",
+      messagePlaceholder: "Describe your project...",
+      error: "An error occurred. Please try again.",
+      submit: "Send message",
+      namePlaceholder: "John Smith",
+      emailPlaceholder: "john@example.com",
+    },
+  }[locale];
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -68,17 +116,16 @@ export default function ContactForm() {
       >
         <CheckCircle2 className="w-16 h-16 text-brand-orange mx-auto mb-6" />
         <h3 className="text-3xl font-black uppercase italic mb-4">
-          Message Envoyé
+          {t.successTitle}
         </h3>
         <p className="text-gray-600 mb-8">
-          Merci de nous avoir contactés. Notre équipe vous répondra dans les
-          plus brefs délais.
+          {t.successText}
         </p>
         <button
           onClick={() => setStatus("idle")}
           className="px-8 py-3 bg-brand-black text-white font-bold uppercase tracking-widest hover:bg-brand-orange hover:text-brand-black transition-all"
         >
-          Nouvelle demande
+          {t.newRequest}
         </button>
       </motion.div>
     );
@@ -90,11 +137,10 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
             <h2 className="text-5xl md:text-6xl text-blue-950 uppercase italic leading-none mb-8">
-              Contactez <span className="text-brand-orange">Nous</span>
+              {t.headingStart} <span className="text-brand-orange">{t.headingEnd}</span>
             </h2>
             <p className="text-gray-600 text-lg mb-12 leading-relaxed">
-              Une question ? Un projet ? Notre équipe est à votre écoute pour
-              vous accompagner dans vos réalisations.
+              {t.intro}
             </p>
 
             <div className="space-y-8">
@@ -103,7 +149,7 @@ export default function ContactForm() {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold uppercase mb-1">Localisation</h4>
+                  <h4 className="font-bold uppercase mb-1">{t.location}</h4>
                   <p className="text-gray-500 text-sm">
                     Eleveur, Yaoundé, Cameroun
                   </p>
@@ -114,7 +160,7 @@ export default function ContactForm() {
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold uppercase mb-1">Téléphone</h4>
+                  <h4 className="font-bold uppercase mb-1">{t.phone}</h4>
                   <p className="text-gray-500 text-sm">
                     +237 699 87 82 71 / +267 699 45 67 00
                   </p>
@@ -137,7 +183,7 @@ export default function ContactForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                    Nom Complet
+                    {t.fullName}
                   </label>
                   <input
                     required
@@ -147,12 +193,12 @@ export default function ContactForm() {
                       setFormData({ ...formData, name: e.target.value })
                     }
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors"
-                    placeholder="Jean Dupont"
+                    placeholder={t.namePlaceholder}
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                    Telephone
+                    {t.phone}
                   </label>
                   <input
                     required
@@ -162,7 +208,7 @@ export default function ContactForm() {
                       setFormData({ ...formData, telephone: e.target.value })
                     }
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors"
-                    placeholder="Numéro de téléphone"
+                    placeholder={t.phonePlaceholder}
                   />
                 </div>
                 <div className="space-y-2">
@@ -177,14 +223,14 @@ export default function ContactForm() {
                       setFormData({ ...formData, email: e.target.value })
                     }
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors"
-                    placeholder="jean@exemple.com"
+                    placeholder={t.emailPlaceholder}
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                  Sujet
+                  {t.subject}
                 </label>
                 <input
                   required
@@ -194,13 +240,13 @@ export default function ContactForm() {
                     setFormData({ ...formData, subject: e.target.value })
                   }
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors"
-                  placeholder="Objet de votre message"
+                  placeholder={t.subjectPlaceholder}
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-widest text-gray-500">
-                  Message / Détails
+                  {t.message}
                 </label>
                 <textarea
                   required
@@ -210,13 +256,13 @@ export default function ContactForm() {
                     setFormData({ ...formData, message: e.target.value })
                   }
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 focus:outline-none focus:border-brand-orange transition-colors resize-none"
-                  placeholder="Décrivez votre projet..."
+                  placeholder={t.messagePlaceholder}
                 />
               </div>
 
               {status === "error" && (
                 <p className="text-red-500 text-sm font-bold">
-                  Une erreur est survenue. Veuillez réessayer.
+                  {t.error}
                 </p>
               )}
 
@@ -229,7 +275,7 @@ export default function ContactForm() {
                   <Loader2 className="w-5 h-5 animate-spin" />
                 ) : (
                   <>
-                    Envoyer le message
+                    {t.submit}
                     <Send className="w-5 h-5" />
                   </>
                 )}

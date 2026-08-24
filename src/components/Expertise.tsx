@@ -1,10 +1,14 @@
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { expertises } from "../data/expertises";
+import { getExpertises } from "../data/expertises";
 import building from "../public/backgrounds/building.png";
+import { useLanguage, withLocale } from "../lib/i18n";
 
 export default function Expertise() {
+  const locale = useLanguage();
+  const localizedExpertises = getExpertises(locale);
+
   return (
     <section id="expertise" className="relative py-24 lg:py-28 overflow-hidden">
       {/* Background Layer - Image de bâtiment floutée en noir et blanc */}
@@ -27,15 +31,17 @@ export default function Expertise() {
             <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-12 bg-brand-orange" />
               <span className="text-brand-orange font-black tracking-[0.28em] uppercase text-xs">
-                Domaines d'intervention
+                {locale === "en" ? "Areas of intervention" : "Domaines d'intervention"}
               </span>
             </div>
             <h2 className="text-5xl md:text-6xl font-black text-blue-950 uppercase italic leading-none mb-6">
-              Notre <span className="text-brand-orange">Expertise</span>
+              {locale === "en" ? "Our" : "Notre"}{" "}
+              <span className="text-brand-orange">Expertise</span>
             </h2>
             <p className="text-blue-950/80 text-lg font-medium border-l-4 border-brand-orange pl-6">
-              Une approche rigoureuse et des équipements de pointe pour garantir
-              la solidité de vos projets.
+              {locale === "en"
+                ? "A rigorous approach and advanced equipment to guarantee the solidity of your projects."
+                : "Une approche rigoureuse et des équipements de pointe pour garantir la solidité de vos projets."}
             </p>
           </div>
           {/* <div className="text-9xl font-black text-blue-950/5 select-none hidden lg:block tracking-tighter">
@@ -45,7 +51,7 @@ export default function Expertise() {
 
         {/* Grid avec effet de verre (Glassmorphism) léger */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {expertises.map((item, index) => (
+          {localizedExpertises.map((item, index) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 20 }}
@@ -55,7 +61,7 @@ export default function Expertise() {
               className="bg-white border border-gray-200 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 group relative overflow-hidden"
             >
               <Link
-                to={`/expertise/${item.slug}`}
+                to={withLocale(`/expertise/${item.slug}`, locale)}
                 className="block h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-orange/60"
               >
                 <div className="relative h-48 overflow-hidden bg-blue-950">
@@ -80,7 +86,7 @@ export default function Expertise() {
                   </p>
 
                   <span className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-orange">
-                    Découvrir
+                    {locale === "en" ? "Discover" : "Découvrir"}
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>

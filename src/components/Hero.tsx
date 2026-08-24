@@ -9,23 +9,24 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { HashLink } from "react-router-hash-link";
-import { expertises } from "../data/expertises";
-
-const metrics = [
-  { value: "+25", label: "ans d'expérience" },
-  { value: "+50", label: "chantiers livrés" },
-  { value: "02", label: "bureaux régionaux" },
-];
-
-const assurances = [
-  { icon: ShieldCheck, label: "Contrôle qualité" },
-  { icon: ClipboardCheck, label: "Études chiffrées" },
-  { icon: MapPinned, label: "Intervention Cameroun" },
-];
+import { getExpertises } from "../data/expertises";
+import { useLanguage, withLocale } from "../lib/i18n";
 
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentSlide = expertises[currentIndex];
+  const locale = useLanguage();
+  const localizedExpertises = getExpertises(locale);
+  const currentSlide = localizedExpertises[currentIndex];
+  const metrics = [
+    { value: "+25", label: locale === "en" ? "years of experience" : "ans d'expérience" },
+    { value: "+50", label: locale === "en" ? "sites delivered" : "chantiers livrés" },
+    { value: "02", label: locale === "en" ? "regional offices" : "bureaux régionaux" },
+  ];
+  const assurances = [
+    { icon: ShieldCheck, label: locale === "en" ? "Quality control" : "Contrôle qualité" },
+    { icon: ClipboardCheck, label: locale === "en" ? "Costed studies" : "Études chiffrées" },
+    { icon: MapPinned, label: locale === "en" ? "Cameroon coverage" : "Intervention Cameroun" },
+  ];
 
   // Auto-play : Change d'image toutes des 5 secondes
   useEffect(() => {
@@ -36,11 +37,15 @@ export default function Hero() {
   }, [currentIndex]);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev === expertises.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) =>
+      prev === localizedExpertises.length - 1 ? 0 : prev + 1,
+    );
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? expertises.length - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev === 0 ? localizedExpertises.length - 1 : prev - 1,
+    );
   };
 
   return (
@@ -77,7 +82,9 @@ export default function Hero() {
             <div className="flex items-center gap-3 mb-6">
               <div className="h-px w-12 bg-brand-orange" />
               <span className="text-brand-orange font-black tracking-[0.28em] uppercase text-xs sm:text-sm">
-                {currentSlide.shortTitle} au Cameroun
+                {locale === "en"
+                  ? `${currentSlide.shortTitle} in Cameroon`
+                  : `${currentSlide.shortTitle} au Cameroun`}
               </span>
             </div>
 
@@ -91,17 +98,17 @@ export default function Hero() {
 
             <div className="flex flex-wrap gap-4">
               <HashLink
-                to={`/expertise/${currentSlide.slug}`}
+                to={withLocale(`/expertise/${currentSlide.slug}`, locale)}
                 className="px-7 py-4 bg-brand-orange text-brand-black font-black uppercase tracking-widest hover:bg-white transition-all flex items-center gap-2 group"
               >
-                Découvrir ce service
+                {locale === "en" ? "Discover this service" : "Découvrir ce service"}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </HashLink>
               <HashLink
                 to="#portfolio"
                 className="px-7 py-4 border border-white/30 text-white font-black uppercase tracking-widest hover:bg-white hover:text-blue-950 transition-all"
               >
-                Nos projets
+                {locale === "en" ? "Our projects" : "Nos projets"}
               </HashLink>
             </div>
           </motion.div>
@@ -143,7 +150,7 @@ export default function Hero() {
 
         <div className="mt-12 flex items-center justify-between gap-6">
           <div className="flex gap-2">
-            {expertises.map((item, index) => (
+            {localizedExpertises.map((item, index) => (
               <button
                 key={item.slug}
                 onClick={() => setCurrentIndex(index)}
@@ -152,7 +159,7 @@ export default function Hero() {
                     ? "w-10 bg-brand-orange"
                     : "w-5 bg-white/35 hover:bg-white/70"
                 }`}
-                aria-label={`Voir le service ${item.title}`}
+                aria-label={locale === "en" ? `View service ${item.title}` : `Voir le service ${item.title}`}
               />
             ))}
           </div>
@@ -161,14 +168,14 @@ export default function Hero() {
             <button
               onClick={prevSlide}
               className="p-3 border border-white/25 text-white hover:bg-brand-orange hover:border-brand-orange hover:text-black transition-all"
-              aria-label="Précédent"
+              aria-label={locale === "en" ? "Previous" : "Précédent"}
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={nextSlide}
               className="p-3 border border-white/25 text-white hover:bg-brand-orange hover:border-brand-orange hover:text-black transition-all"
-              aria-label="Suivant"
+              aria-label={locale === "en" ? "Next" : "Suivant"}
             >
               <ChevronRight className="w-6 h-6" />
             </button>

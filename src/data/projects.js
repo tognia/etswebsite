@@ -104,3 +104,64 @@ export const projects = [
     status: "Livré",
   },
 ];
+
+export const projectsEn = [
+  {
+    ...projects[0],
+    title: "National Public Health Laboratory",
+    description:
+      "NPHL renovation works funded by USA-CDC, with works supervised by ZIAS.",
+    category: "Building",
+    location: "Yaounde Messa, Cameroon",
+    status: "Delivered",
+  },
+  {
+    ...projects[1],
+    title: "Training Laboratory",
+    description:
+      "Construction works for a training laboratory funded by USAID, with works supervised by ZIAS.",
+    category: "Building",
+    location: "Yaounde Messa, Cameroon",
+    status: "Delivered",
+  },
+  {
+    ...projects[2],
+    title: "Cinquantenaire House - Missionary Housing",
+    description:
+      "Construction of a Cinquantenaire house for missionary housing for the Diocese of Maroua.",
+    category: "Building",
+    location: "Maroua, Cameroon",
+    status: "Delivered",
+  },
+  {
+    ...projects[3],
+    title: "LANAVET Renovation - Douala & Garoua",
+    description:
+      "Renovation works for the National Veterinary Laboratory (LANAVET) in Douala and Garoua, funded by DTRA and the U.S. Army with support from the U.S. Embassy.",
+    category: "Civil Engineering",
+    location: "Douala & Garoua, Cameroon",
+    status: "Delivered",
+  },
+  {
+    ...projects[4],
+    title: "Maroua Cathedral - Cameroon",
+    category: "Civil Engineering",
+    location: "Maroua, Cameroon",
+    status: "Delivered",
+  },
+  {
+    ...projects[5],
+    title: "Tcholere Maternity Unit - Cameroon",
+    category: "Building",
+    location: "Tcholere, Cameroon",
+    status: "Delivered",
+  },
+];
+
+export function getProjects(locale = "fr") {
+  return locale === "en" ? projectsEn : projects;
+}
+
+export function getProjectById(id, locale = "fr") {
+  return getProjects(locale).find((project) => project.id === Number(id));
+}

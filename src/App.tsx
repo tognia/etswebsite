@@ -18,47 +18,50 @@ import DevisPage from "./app/devisPage";
 import ProjectsPage from "./app/projectsPage"; // Assurez-vous que ce fichier existe
 import AboutPage from "./app/AboutPage"; // Assurez-vous que ce fichier existe
 import ExpertisePage from "./app/ExpertisePage";
+import { LanguageProvider } from "./lib/i18n";
+
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <Expertise />
+      <Portfolio />
+      {/* <DevisForm /> */}
+      <ContactForm />
+    </>
+  );
+}
 
 export default function App() {
   return (
     <ErrorBoundary>
-      <div className="min-h-screen font-sans selection:bg-brand-orange selection:text-brand-black">
-        <SEO />
-        <Navbar />
+      <LanguageProvider>
+        <div className="min-h-screen font-sans selection:bg-brand-orange selection:text-brand-black">
+          <SEO />
+          <Navbar />
 
-        <main>
-          {/* Définition des routes */}
-          <Routes>
-            {/* Route principale : Accueil */}
-            <Route
-              path="/"
-              element={
-                <>
-                  <Hero />
-                  <Expertise />
-                  <Portfolio />
-                  {/* <DevisForm /> */}
-                  <ContactForm />
-                </>
-              }
-            />
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/en" element={<HomePage />} />
 
-            {/* Route dynamique pour les détails de projet */}
-            <Route path="/project/:id" element={<ProjectDetail />} />
+              <Route path="/project/:id" element={<ProjectDetail />} />
+              <Route path="/en/project/:id" element={<ProjectDetail />} />
 
-            {/* Route pour la page de demande de devis */}
-            <Route path="/devisPage" element={<DevisPage />} />
-            {/* Route pour la page de projets */}
-            <Route path="/projectsPage" element={<ProjectsPage />} />
-            {/* Route pour la page À PROPOS */}
-            <Route path="/aboutPage" element={<AboutPage />} />
-            {/* Route pour les pages d'expertise */}
-            <Route path="/expertise/:slug" element={<ExpertisePage />} />
-          </Routes>
-        </main>
+              <Route path="/devisPage" element={<DevisPage />} />
+              <Route path="/en/devisPage" element={<DevisPage />} />
+              <Route path="/projectsPage" element={<ProjectsPage />} />
+              <Route path="/en/projectsPage" element={<ProjectsPage />} />
+              <Route path="/aboutPage" element={<AboutPage />} />
+              <Route path="/en/aboutPage" element={<AboutPage />} />
+              <Route path="/expertise/:slug" element={<ExpertisePage />} />
+              <Route path="/en/expertise/:slug" element={<ExpertisePage />} />
+            </Routes>
+          </main>
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </LanguageProvider>
     </ErrorBoundary>
   );
 }

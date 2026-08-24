@@ -1,11 +1,14 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import { projects } from "../data/projects"; // Assurez-vous que ce fichier existe et exporte une liste de projets
+import { getProjects } from "../data/projects"; // Assurez-vous que ce fichier existe et exporte une liste de projets
 import { ArrowRight, MapPin } from "lucide-react";
+import { useLanguage, withLocale } from "../lib/i18n";
 
 export default function Portfolio() {
-  const featuredProject = projects[0];
-  const previewProjects = projects.slice(1, 4);
+  const locale = useLanguage();
+  const localizedProjects = getProjects(locale);
+  const featuredProject = localizedProjects[0];
+  const previewProjects = localizedProjects.slice(1, 4);
 
   return (
     <section id="portfolio" className="py-24 lg:py-28 bg-blue-950 text-white">
@@ -15,28 +18,32 @@ export default function Portfolio() {
             <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-12 bg-brand-orange" />
               <span className="text-brand-orange font-black tracking-[0.28em] uppercase text-xs">
-                Chantiers livrés
+                {locale === "en" ? "Delivered works" : "Chantiers livrés"}
               </span>
             </div>
             <h2 className="text-5xl md:text-6xl font-black uppercase italic leading-none mb-6">
-              Nos <span className="text-brand-orange">Réalisations</span>
+              {locale === "en" ? "Our" : "Nos"}{" "}
+              <span className="text-brand-orange">
+                {locale === "en" ? "Projects" : "Réalisations"}
+              </span>
             </h2>
             <p className="text-blue-100/80 text-lg leading-relaxed border-l-4 border-brand-orange pl-6">
-              Des ouvrages techniques menés avec une exigence constante sur la
-              qualité, la coordination et la tenue des délais.
+              {locale === "en"
+                ? "Technical works delivered with constant attention to quality, coordination, and deadlines."
+                : "Des ouvrages techniques menés avec une exigence constante sur la qualité, la coordination et la tenue des délais."}
             </p>
           </div>
           <Link
-            to="/projectsPage"
+            to={withLocale("/projectsPage", locale)}
             className="inline-flex items-center gap-2 text-white font-black uppercase tracking-widest hover:text-brand-orange transition-colors"
           >
-            Tous les projets
+            {locale === "en" ? "All projects" : "Tous les projets"}
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <Link to={`/project/${featuredProject.id}`} className="lg:col-span-7">
+          <Link to={withLocale(`/project/${featuredProject.id}`, locale)} className="lg:col-span-7">
             <motion.div
               whileHover={{ y: -6 }}
               className="group relative min-h-[520px] overflow-hidden bg-gray-900 border border-white/10"
@@ -48,7 +55,7 @@ export default function Portfolio() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/35 to-transparent" />
               <div className="absolute left-0 top-0 bg-brand-orange text-brand-black px-5 py-3 text-xs font-black uppercase tracking-widest">
-                Projet phare
+                {locale === "en" ? "Featured project" : "Projet phare"}
               </div>
               <div className="absolute inset-x-0 bottom-0 p-8">
                 <p className="text-brand-orange font-black uppercase tracking-widest text-xs mb-3">
@@ -67,7 +74,7 @@ export default function Portfolio() {
 
           <div className="lg:col-span-5 grid grid-cols-1 gap-6">
             {previewProjects.map((project) => (
-              <Link to={`/project/${project.id}`} key={project.id}>
+              <Link to={withLocale(`/project/${project.id}`, locale)} key={project.id}>
                 <motion.div
                   whileHover={{ x: 6 }}
                   className="group grid grid-cols-[120px_1fr] sm:grid-cols-[180px_1fr] min-h-40 overflow-hidden bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"

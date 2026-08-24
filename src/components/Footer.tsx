@@ -9,8 +9,43 @@ import {
   Linkedin,
   Instagram,
 } from "lucide-react";
+import { useLanguage, withLocale } from "../lib/i18n";
 
 export default function Footer() {
+  const locale = useLanguage();
+  const t = {
+    fr: {
+      tagline:
+        "Nous construisons les infrastructures de demain avec rigueur et innovation.",
+      home: "Accueil",
+      projects: "Nos Projets",
+      quote: "Demander un Devis",
+      contactUs: "Contactez-nous",
+      about: "À PROPOS",
+      newsletter: "Newsletter",
+      newsletterText: "Restez informé de nos derniers projets et innovations.",
+      emailPlaceholder: "Votre email",
+      rights: "Tous droits réservés.",
+      legal: "Mentions Légales",
+      privacy: "Politique de Confidentialité",
+    },
+    en: {
+      tagline:
+        "We build tomorrow's infrastructure with rigor and innovation.",
+      home: "Home",
+      projects: "Our Projects",
+      quote: "Request a Quote",
+      contactUs: "Contact us",
+      about: "About",
+      newsletter: "Newsletter",
+      newsletterText: "Stay informed about our latest projects and innovations.",
+      emailPlaceholder: "Your email",
+      rights: "All rights reserved.",
+      legal: "Legal Notice",
+      privacy: "Privacy Policy",
+    },
+  }[locale];
+
   return (
     <footer className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-500 via-blue-300 to-transparent text-blue-950 pt-24 pb-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,8 +58,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-blue-950 leading-relaxed">
-              Nous construisons les infrastructures de demain avec rigueur et
-              innovation.
+              {t.tagline}
             </p>
             <div className="flex gap-4">
               {/* <a
@@ -56,15 +90,15 @@ export default function Footer() {
             <ul className="space-y-4 text-blue-950">
               <li>
                 <HashLink
-                  to="/"
+                  to={withLocale("/", locale)}
                   className="hover:text-brand-orange transition-colors"
                 >
-                  Accueil
+                  {t.home}
                 </HashLink>
               </li>
               <li>
                 <HashLink
-                  to="/#expertise"
+                  to={withLocale("/#expertise", locale)}
                   className="hover:text-brand-orange transition-colors"
                 >
                   Expertise
@@ -72,34 +106,34 @@ export default function Footer() {
               </li>
               <li>
                 <HashLink
-                  to="/#portfolio"
+                  to={withLocale("/#portfolio", locale)}
                   className="hover:text-brand-orange transition-colors"
                 >
-                  Nos Projets
+                  {t.projects}
                 </HashLink>
               </li>
               <li>
                 <HashLink
-                  to="/devisPage"
+                  to={withLocale("/devisPage", locale)}
                   className="hover:text-brand-orange transition-colors"
                 >
-                  Demander un Devis
+                  {t.quote}
                 </HashLink>
               </li>
               <li>
                 <HashLink
-                  to="/#contact"
+                  to={withLocale("/#contact", locale)}
                   className="hover:text-brand-orange transition-colors"
                 >
-                  Contactez-nous
+                  {t.contactUs}
                 </HashLink>
               </li>
               <li>
                 <HashLink
-                  to="/aboutPage"
+                  to={withLocale("/aboutPage", locale)}
                   className="hover:text-brand-orange transition-colors"
                 >
-                  À PROPOS
+                  {t.about}
                 </HashLink>
               </li>
             </ul>
@@ -127,15 +161,15 @@ export default function Footer() {
 
           <div>
             <h4 className="text-lg font-bold uppercase mb-8 tracking-widest">
-              Newsletter
+              {t.newsletter}
             </h4>
             <p className="text-blue-950 mb-6">
-              Restez informé de nos derniers projets et innovations.
+              {t.newsletterText}
             </p>
             <form className="flex">
               <input
                 type="email"
-                placeholder="Votre email"
+                placeholder={t.emailPlaceholder}
                 className="bg-white/5 border border-white/10 px-4 py-2 w-full focus:outline-none focus:border-brand-orange transition-colors"
               />
               <button className="bg-brand-orange text-brand-black px-4 py-2 font-bold uppercase text-xs">
@@ -146,16 +180,16 @@ export default function Footer() {
         </div>
 
         <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500">
-          <p>© {new Date().getFullYear()} ETS N MOISE. Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} ETS N MOISE. {t.rights}</p>
           <div className="flex gap-8">
             <a
               href="/mentions-legales"
               className="hover:text-white transition-colors"
             >
-              Mentions Légales
+              {t.legal}
             </a>
             <a href="#" className="hover:text-white transition-colors">
-              Politique de Confidentialité
+              {t.privacy}
             </a>
           </div>
         </div>
