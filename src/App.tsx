@@ -18,6 +18,7 @@ import DevisPage from "./app/devisPage";
 import ProjectsPage from "./app/projectsPage"; // Assurez-vous que ce fichier existe
 import AboutPage from "./app/AboutPage"; // Assurez-vous que ce fichier existe
 import ExpertisePage from "./app/ExpertisePage";
+import LegalPage from "./app/LegalPage";
 import { LanguageProvider } from "./lib/i18n";
 
 function HomePage() {
@@ -56,6 +57,8 @@ export default function App() {
               <Route path="/en/aboutPage" element={<AboutPage />} />
               <Route path="/expertise/:slug" element={<ExpertisePage />} />
               <Route path="/en/expertise/:slug" element={<ExpertisePage />} />
+              <Route path="/mentions-legales" element={<LegalPage />} />
+              <Route path="/en/mentions-legales" element={<LegalPage />} />
             </Routes>
           </main>
 
