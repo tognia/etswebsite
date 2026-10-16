@@ -48,6 +48,12 @@ const routeMeta = {
       "devis BTP Cameroun, devis construction Yaounde, devis renovation Cameroun, demande devis chantier, ETS N MOISE",
     schemaType: "ContactPage",
   },
+  "/mentions-legales": {
+    title: "Mentions legales | ETS N MOISE",
+    description: "Mentions legales et informations relatives au site officiel de ETS N MOISE.",
+    keywords: "mentions legales ETS N MOISE, contact ETS N MOISE",
+    schemaType: "WebPage",
+  },
 };
 
 const routeMetaEn = {
@@ -80,6 +86,12 @@ const routeMetaEn = {
     keywords:
       "construction quote Cameroon, building quote Yaounde, renovation quote Cameroon, site estimate, ETS N MOISE",
     schemaType: "ContactPage",
+  },
+  "/mentions-legales": {
+    title: "Legal Notice | ETS N MOISE",
+    description: "Legal notice and information about the official ETS N MOISE website.",
+    keywords: "ETS N MOISE legal notice, ETS N MOISE contact",
+    schemaType: "WebPage",
   },
 };
 
@@ -117,6 +129,21 @@ function upsertLink(rel: string, href: string) {
   element.setAttribute("href", href);
 }
 
+function upsertAlternate(hreflang: string, href: string) {
+  let element = document.head.querySelector<HTMLLinkElement>(
+    `link[rel="alternate"][hreflang="${hreflang}"]`,
+  );
+
+  if (!element) {
+    element = document.createElement("link");
+    element.rel = "alternate";
+    element.hreflang = hreflang;
+    document.head.appendChild(element);
+  }
+
+  element.href = href;
+}
+
 function upsertJsonLd(id: string, data: unknown) {
   let element = document.getElementById(id) as HTMLScriptElement | null;
 
@@ -131,10 +158,8 @@ function upsertJsonLd(id: string, data: unknown) {
 }
 
 function getBaseUrl() {
-  const origin = window.location.origin.replace(/\/$/, "");
-  return origin.includes("localhost") || origin.includes("127.0.0.1")
-    ? SITE_URL
-    : origin;
+  // Consolidate every deployment and hostname variant on the public domain.
+  return SITE_URL;
 }
 
 function absoluteUrl(pathOrAsset: string, baseUrl: string) {
@@ -209,7 +234,10 @@ export default function SEO() {
           ogType: "website",
         };
 
-    const canonicalPath = location.pathname === "/" ? "/" : location.pathname;
+    const canonicalPath =
+      location.pathname === "/"
+        ? "/"
+        : location.pathname.replace(/\/+$/, "");
     const canonicalUrl = `${baseUrl}${canonicalPath}`;
     const alternatePath =
       locale === "en"
@@ -311,23 +339,9 @@ export default function SEO() {
     });
 
     upsertLink("canonical", metadata.canonicalUrl);
-    upsertLink("alternate", metadata.canonicalUrl);
-    document
-      .head
-      .querySelector<HTMLLinkElement>('link[rel="alternate"]')
-      ?.setAttribute("hreflang", metadata.locale === "en" ? "en-CM" : "fr-CM");
-
-    let alternateLanguage = document.head.querySelector<HTMLLinkElement>(
-      'link[data-locale-alternate="true"]',
-    );
-    if (!alternateLanguage) {
-      alternateLanguage = document.createElement("link");
-      alternateLanguage.rel = "alternate";
-      alternateLanguage.dataset.localeAlternate = "true";
-      document.head.appendChild(alternateLanguage);
-    }
-    alternateLanguage.href = metadata.alternateUrl;
-    alternateLanguage.hreflang = metadata.locale === "en" ? "fr-CM" : "en-CM";
+    upsertAlternate(metadata.locale === "en" ? "en-CM" : "fr-CM", metadata.canonicalUrl);
+    upsertAlternate(metadata.locale === "en" ? "fr-CM" : "en-CM", metadata.alternateUrl);
+    upsertAlternate("x-default", `${metadata.baseUrl}/`);
 
     upsertJsonLd("seo-organization", {
       "@context": "https://schema.org",
